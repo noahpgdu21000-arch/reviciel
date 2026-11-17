@@ -85,6 +85,7 @@
         '<div class="settings-row"><div class="lbl"><b>Mode hors connexion</b><span>' + appStatus + '</span></div></div>' +
         (P && P.canInstall() ? '<div class="settings-row"><div class="lbl"><b>Installer l\'appli</b><span>Ajoute RéviCIEL à ton écran d\'accueil ou à ton PC.</span></div><button class="btn" data-act="install">' + icon('phone') + ' Installer</button></div>' : '') +
         (P && P.isIOS() && !P.isStandalone() ? '<div class="settings-row"><div class="lbl"><b>Installer sur iPhone / iPad</b><span>Dans Safari : bouton Partager → « Sur l\'écran d\'accueil ».</span></div></div>' : '') +
+        '<div class="settings-row"><div class="lbl"><b>Version PC à télécharger</b><span>Un fichier .zip : la version hors ligne (sans installation) et un installateur Windows.</span></div><a class="btn secondary" href="https://github.com/noahpgdu21000-arch/reviciel/releases/latest/download/ReviCIEL-PC.zip" rel="noopener">' + icon('download') + ' Télécharger</a></div>' +
         (P && P.reg ? '<div class="settings-row"><div class="lbl"><b>Mises à jour</b><span>Version du contenu : ' + E((window.REVICIEL_CONTENT || {}).version || '?') + '</span></div><button class="btn secondary" data-act="update">' + icon('refresh') + ' Vérifier</button></div>' : '') +
         '</div>' +
         '<div class="card section"><h2>Mes données</h2><p class="small muted">Ta progression et tes fiches perso sont enregistrées uniquement dans ce navigateur. Exporte une sauvegarde pour les transférer sur un autre appareil.</p>' +
