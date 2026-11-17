@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RéviCIEL — Révisions Première Bac Pro CIEL</title>
+<meta name="description" content="Fiches de révision interactives pour la Première Bac Pro CIEL : matières générales et enseignement professionnel. Cartes mémoire, quiz, entraînements, fonctionne hors connexion.">
+<meta name="theme-color" content="#1d4ed8">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="RéviCIEL">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="stylesheet" href="css/app.css">
+<script>
+  // Applique le thème avant l'affichage pour éviter un flash blanc
+  (function () {
+    try {
+      var s = JSON.parse(localStorage.getItem('reviciel.v1') || '{}').settings || {};
+      if (s.theme === 'light' || s.theme === 'dark') document.documentElement.setAttribute('data-theme', s.theme);
+      if (s.fontSize === 'l') document.documentElement.classList.add('font-l');
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip-link" href="#view">Aller au contenu</a>
+<div class="app">
+  <header class="topbar">
+    <a class="brand" href="#/" aria-label="RéviCIEL, accueil">
+      <img src="icons/icon.svg" alt="" width="32" height="32">
+      <span>Révi<b>CIEL</b></span>
+    </a>
+    <form class="search" role="search" id="search-form">
+      <input id="search-input" type="search" placeholder="Rechercher une notion, une fiche…" aria-label="Rechercher" autocomplete="off">
+    </form>
+    <div class="topbar-actions">
+      <span class="net-badge" id="net-badge" hidden>Hors ligne</span>
+      <a class="icon-btn" href="#/recherche" id="search-btn" aria-label="Rechercher" data-icon="search"></a>
+      <a class="icon-btn" href="#/parametres" aria-label="Paramètres" data-icon="settings"></a>
+    </div>
+  </header>
+
+  <nav class="sidebar" aria-label="Navigation principale" id="sidebar"></nav>
+
+  <main id="view" class="view" tabindex="-1"></main>
+
+  <nav class="tabbar" aria-label="Navigation" id="tabbar"></nav>
+</div>
+<div class="toast-zone" id="toasts" aria-live="polite"></div>
+
+<script src="js/content.js"></script>
+<script src="js/markdown.js"></script>
+<script src="js/store.js"></script>
+<script src="js/data.js"></script>
+<script src="js/trainers.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/views.js"></script>
+<script src="js/study.js"></script>
+<script src="js/pages.js"></script>
+<script src="js/editor.js"></script>
+<script src="js/pwa.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
