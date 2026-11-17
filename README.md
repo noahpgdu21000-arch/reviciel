@@ -15,28 +15,33 @@ et l'enseignement professionnel CIEL. Une fois ouverte une première fois, l'app
 - **Mes fiches** : crée tes propres fiches (avec cartes et quiz), importe/exporte-les
 - Progression par matière, série de jours, recherche, favoris, thème clair/sombre
 
-## Utiliser sur PC
+## Le site web
 
-**Le plus simple (aucune installation) :** double-clique sur `dist\RéviCIEL-hors-ligne.html`.
-C'est un fichier unique qui contient tout : il marche sans internet et sans serveur.
+**https://noahpgdu21000-arch.github.io/reviciel/** (hébergé gratuitement par GitHub Pages,
+dépôt : https://github.com/noahpgdu21000-arch/reviciel).
 
-**En version appli installable :** double-clique sur `lancer.bat` (il faut Node.js, déjà installé sur ce PC),
-le site s'ouvre sur http://localhost:8080. Dans Edge ou Chrome, clique sur l'icône « Installer » dans la
-barre d'adresse (ou *Paramètres → Installer l'appli* dans RéviCIEL).
+## L'appli sur PC
 
-## Mettre l'appli sur ton téléphone (hors connexion)
+Elle est installée : icône **RéviCIEL** sur le Bureau et dans le menu Démarrer (fenêtre à part, marche sans internet
+après la première ouverture). Pour la réinstaller : double-clique sur `installer-pc.bat`.
 
-Pour s'installer sur un téléphone, l'appli doit être ouverte **une fois** depuis une adresse web en `https://`.
-Le plus rapide et gratuit :
+Sans rien installer, `dist\RéviCIEL-hors-ligne.html` contient aussi tout le site dans un seul fichier.
 
-1. Va sur **https://app.netlify.com/drop** (compte gratuit) et glisse-dépose le dossier `revision-ciel` entier.
-2. Tu obtiens une adresse du type `https://xxxx.netlify.app` : ouvre-la sur ton téléphone.
-3. **Android (Chrome)** : menu ⋮ → *Installer l'application* (ou *Ajouter à l'écran d'accueil*).
+## L'appli sur téléphone (hors connexion)
+
+1. Sur ton téléphone, ouvre **https://noahpgdu21000-arch.github.io/reviciel/** (avec internet, une seule fois).
+2. **Android (Chrome)** : menu ⋮ → *Installer l'application* (ou *Ajouter à l'écran d'accueil*).
    **iPhone (Safari)** : bouton *Partager* → *Sur l'écran d'accueil*.
-4. C'est fini : l'icône RéviCIEL marche ensuite **sans internet**.
+3. L'icône RéviCIEL marche ensuite **sans internet**.
 
-Autres possibilités : GitHub Pages, ou copier `dist\RéviCIEL-hors-ligne.html` sur le téléphone et l'ouvrir avec le navigateur.
-Si un jour tu veux un vrai fichier APK Android, le site **PWABuilder.com** peut le générer à partir de l'adresse en ligne.
+Astuce : dans Edge sur le PC, clic droit sur la page → *Créer un code QR pour cette page*, puis scanne-le avec le téléphone.
+Si un jour tu veux un vrai fichier APK Android, le site **PWABuilder.com** peut le générer à partir de l'adresse du site.
+
+## Mettre à jour le site et les applis
+
+Après avoir ajouté ou modifié des fiches dans `fiches\` : double-clique sur **`publier.bat`**.
+Il reconstruit le site, l'envoie sur GitHub, et le site se met à jour en 1 à 2 minutes.
+À la prochaine ouverture, l'appli (PC ou téléphone) affiche « Nouvelle version disponible → Mettre à jour ».
 
 > La progression est enregistrée dans le navigateur de chaque appareil. Pour la transférer :
 > *Paramètres → Exporter* sur un appareil, puis *Importer* sur l'autre.
@@ -48,9 +53,9 @@ Si un jour tu veux un vrai fichier APK Android, le site **PWABuilder.com** peut 
 **Dans le projet** (pour que les fiches soient incluses pour tout le monde) :
 
 1. Ajoute un fichier `.md` dans `fiches\<matière>\` (inspire-toi d'une fiche existante).
-2. Double-clique sur `construire.bat` (ou `node outils/build.js`) : il vérifie le format, régénère `js/content.js`,
-   met à jour le cache hors ligne et la version `dist\RéviCIEL-hors-ligne.html`.
-3. Si l'appli est en ligne, re-dépose le dossier sur Netlify : l'appli installée proposera « Mettre à jour ».
+2. Double-clique sur `construire.bat` pour vérifier le format (il régénère `js/content.js`, le cache hors ligne
+   et `dist\RéviCIEL-hors-ligne.html`).
+3. Double-clique sur `publier.bat` pour mettre le site en ligne à jour.
 
 Format d'une fiche :
 
@@ -90,9 +95,10 @@ revision-ciel/
 ├── js/                                       code de l'appli (content.js est généré)
 ├── fiches/<matière>/*.md                     le contenu des fiches
 ├── icons/                                    icônes de l'appli
-├── outils/build.js, outils/serveur.js        construction et petit serveur local
+├── outils/                                   build.js, serveur.js, installer-pc.ps1, site-url.txt
 ├── dist/RéviCIEL-hors-ligne.html             version « un seul fichier » (générée)
-└── construire.bat, lancer.bat                raccourcis Windows
+└── construire.bat, publier.bat,              raccourcis Windows
+    installer-pc.bat, lancer.bat
 ```
 
 Les fiches résument le programme : en cas de doute, ton cours et tes professeurs font foi.
