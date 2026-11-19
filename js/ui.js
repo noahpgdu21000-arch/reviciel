@@ -62,7 +62,8 @@
     { href: '#/reviser', label: 'Réviser', icon: 'cards', re: /^\/reviser/, tab: true, badge: true },
     { href: '#/quiz', label: 'Quiz', icon: 'quiz', re: /^\/quiz/, tab: true },
     { href: '#/entrainement', label: 'Exercices', icon: 'target', re: /^\/entrainement/, tab: true },
-    { href: '#/mes-fiches', label: 'Mes fiches', icon: 'pen', re: /^\/(mes-fiches|editeur)/, tab: true },
+    { href: '#/labo', label: 'Labo réseau', short: 'Labo', icon: 'network', re: /^\/labo/, tab: true },
+    { href: '#/mes-fiches', label: 'Mes fiches', icon: 'pen', re: /^\/(mes-fiches|editeur)/ },
     { href: '#/favoris', label: 'Favoris', icon: 'star', re: /^\/favoris/ },
     { href: '#/progression', label: 'Progression', icon: 'chart', re: /^\/progression/ },
     { href: '#/parametres', label: 'Paramètres', icon: 'settings', re: /^\/parametres/ }
@@ -83,7 +84,7 @@
     document.getElementById('sidebar').innerHTML = side + groups +
       (perso ? '<div class="nav-section">Perso</div><a class="nav-link" href="#/matiere/perso" data-re="^\\/matiere\\/perso" style="--c:#64748b"><span class="dot"></span><span>Mes fiches perso</span><span class="count">' + perso + '</span></a>' : '');
     document.getElementById('tabbar').innerHTML = NAV.filter((it) => it.tab).map((it) =>
-      '<a href="' + it.href + '" data-re="' + it.re.source + '">' + icon(it.icon) + '<span>' + it.label + '</span></a>').join('');
+      '<a href="' + it.href + '" data-re="' + it.re.source + '">' + icon(it.icon) + '<span>' + (it.short || it.label) + '</span></a>').join('');
     $$('[data-icon]').forEach((el) => { el.innerHTML = icon(el.getAttribute('data-icon')); });
     updateNav();
   }

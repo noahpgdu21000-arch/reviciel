@@ -14,7 +14,7 @@
 
   function defaults() {
     return {
-      read: {}, fav: {}, quiz: {}, cards: {}, trainers: {}, activity: {}, quizLog: [],
+      read: {}, fav: {}, quiz: {}, cards: {}, trainers: {}, labs: {}, activity: {}, quizLog: [],
       last: null, streak: { last: null, count: 0 },
       settings: { theme: 'auto', fontSize: 'm', newPerDay: 20 }
     };
@@ -30,7 +30,7 @@
   function normalize(s) {
     const d = defaults();
     s = Object.assign(d, s && typeof s === 'object' ? s : {});
-    ['read', 'fav', 'quiz', 'cards', 'trainers', 'activity'].forEach((k) => { if (!s[k] || typeof s[k] !== 'object') s[k] = {}; });
+    ['read', 'fav', 'quiz', 'cards', 'trainers', 'labs', 'activity'].forEach((k) => { if (!s[k] || typeof s[k] !== 'object') s[k] = {}; });
     if (!Array.isArray(s.quizLog)) s.quizLog = [];
     if (!s.streak || typeof s.streak !== 'object') s.streak = { last: null, count: 0 };
     s.settings = Object.assign(defaults().settings, s.settings || {});
@@ -103,6 +103,7 @@
     return t;
   }
   function setSetting(k, v) { state.settings[k] = v; save(); }
+  function setLab(id, data) { state.labs[id] = { goals: (data.goals || []).slice(), done: !!data.done }; bump(); save(); }
 
   /* ---------- Fiches perso ---------- */
   function saveUserFiches() { return write(UKEY, userFiches); }
@@ -145,7 +146,7 @@
 
   const api = {
     INTERVALS, today, addDays, save, streak, grade, cardInfo, isNew, isDue, isMastered, newSeenToday,
-    setRead, toggleFav, setLast, saveQuiz, trainerResult, setSetting,
+    setRead, toggleFav, setLast, saveQuiz, trainerResult, setSetting, setLab,
     upsertUserFiche, deleteUserFiche, getDraft, setDraft, clearDraft,
     exportAll, importAll, resetProgress,
     subscribe: (fn) => { listeners.add(fn); return () => listeners.delete(fn); },

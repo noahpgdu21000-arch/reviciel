@@ -65,6 +65,10 @@
         });
         html += '</div></section>';
       });
+      const labsDone = (window.LABS || []).filter((l) => (st.labs[l.id] || {}).done).length;
+      html += '<section class="section"><a class="card tool-card lab-promo" style="--c:#0284c7" href="#/labo"><span class="s-icon">' + icon('network') + '</span><div style="flex:1"><h3>Labo réseau : switchs et routeurs Cisco</h3>' +
+        '<p>Configure de vrais réseaux avec les commandes Cisco IOS, comme dans Packet Tracer : 13 labs avec cours, du niveau débutant au niveau difficile.</p>' +
+        '<div class="row" style="margin-top:8px"><span class="badge ok">' + labsDone + ' / ' + (window.LABS || []).length + ' labs réussis</span></div></div>' + icon('right', 'chev') + '</a></section>';
       html += '<section class="section"><div class="section-head"><h2>Exercices interactifs</h2><a href="#/entrainement" class="small">Tout voir</a></div><div class="grid wide">' +
         window.TRAINERS.map((t) => '<a class="card tool-card" style="--c:' + t.color + '" href="#/entrainement/' + t.id + '"><span class="s-icon">' + icon(t.icon) + '</span><div><h3>' + E(t.title) + '</h3><p>' + E(t.desc) + '</p></div></a>').join('') +
         '</div></section>';

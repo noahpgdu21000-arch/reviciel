@@ -10,6 +10,8 @@ et l'enseignement professionnel CIEL. Une fois ouverte une première fois, l'app
   - Pro CIEL : Réseaux (7), Cybersécurité (5), Informatique & code (4), Électronique (4), Maintenance & client (2)
 - **Cartes mémoire** avec répétition espacée (boîtes de Leitner) et une **révision du jour**
 - **Quiz** par fiche, par matière, ou mélangé, avec corrections expliquées
+- **Labo réseau** : un simulateur de switchs et routeurs avec les commandes Cisco IOS (comme dans Packet Tracer),
+  13 labs avec cours, du niveau débutant au niveau difficile (VLAN, trunk, routage, DHCP, SSH, ACL, dépannage), objectifs vérifiés automatiquement
 - **5 exercices générés à l'infini** et corrigés pas à pas : adressage IPv4, binaire/hexa, loi d'Ohm, code couleur des résistances, pourcentages
 - **Mode caché** (les mots clés surlignés deviennent des trous à deviner), lecture à voix haute, impression
 - **Mes fiches** : crée tes propres fiches (avec cartes et quiz), importe/exporte-les

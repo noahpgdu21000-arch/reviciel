@@ -236,7 +236,9 @@
   /* ---------- Exercices interactifs ---------- */
   App.route(/^\/entrainement$/, (v) => {
     App.setTitle('Exercices');
-    v.innerHTML = '<div class="page-head"><h1>Exercices interactifs</h1><p>Des exercices générés à l\'infini, corrigés pas à pas. Parfait avant un contrôle ou une épreuve pratique.</p></div><div class="grid wide">' +
+    v.innerHTML = '<div class="page-head"><h1>Exercices interactifs</h1><p>Des exercices générés à l\'infini, corrigés pas à pas. Parfait avant un contrôle ou une épreuve pratique.</p></div>' +
+      '<a class="card tool-card lab-promo" style="--c:#0284c7;margin-bottom:14px" href="#/labo"><span class="s-icon">' + icon('network') + '</span><div style="flex:1"><h3>Labo réseau Cisco (simulateur)</h3><p>13 labs avec cours : VLAN, trunk, routage, DHCP, SSH, ACL, dépannage…</p></div>' + icon('right', 'chev') + '</a>' +
+      '<div class="grid wide">' +
       window.TRAINERS.map((t) => {
         const st = Store.state.trainers[t.id];
         return '<a class="card tool-card" style="--c:' + t.color + '" href="#/entrainement/' + t.id + '"><span class="s-icon">' + icon(t.icon) + '</span><div><h3>' + E(t.title) + '</h3><p>' + E(t.desc) + '</p>' +
