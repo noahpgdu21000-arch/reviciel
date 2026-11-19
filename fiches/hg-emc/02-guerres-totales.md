@@ -5,7 +5,7 @@ titre: Guerres européennes, guerres mondiales, guerres totales (1789-1945)
 chapitre: Histoire
 resume: De la levée en masse de 1793 à la guerre d'anéantissement de 1939-1945 : comment les guerres mobilisent des sociétés entières.
 mots-cles: guerre totale, levée en masse, Première Guerre mondiale, Verdun, tranchées, génocide des Arméniens, Seconde Guerre mondiale, Shoah, Vichy, Résistance, guerre d'anéantissement
-ordre: 2
+ordre: 22
 ---
 
 ## Problématique

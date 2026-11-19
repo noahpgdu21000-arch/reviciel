@@ -5,7 +5,7 @@ titre: Métropolisation et périurbanisation en France
 chapitre: Géographie
 resume: Pourquoi les grandes villes concentrent populations et activités, comment elles s'étalent et quels défis cela pose.
 mots-cles: métropole, métropolisation, périurbanisation, étalement urbain, mobilités pendulaires, gentrification, ville durable, artificialisation, aire d'attraction
-ordre: 3
+ordre: 23
 ---
 
 ## Une France très urbaine

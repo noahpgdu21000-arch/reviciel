@@ -63,7 +63,7 @@
   ];
   const SUBJECTS = [
     { id: 'francais', name: 'Français', group: 'gen', icon: 'book', color: '#db2777', desc: 'Roman et personnage, invention et imaginaire, figures de style, argumentation.' },
-    { id: 'hg-emc', name: 'Histoire-Géo & EMC', group: 'gen', icon: 'globe', color: '#b45309', desc: 'États-Unis et monde, guerres totales, métropolisation, égalité et fraternité.' },
+    { id: 'hg-emc', name: 'Histoire-Géo & EMC', group: 'gen', icon: 'globe', color: '#b45309', desc: 'Hommes et femmes au travail (XIXe siècle), essor industriel, travail des enfants, tertiaire, Hubertine Auclert.' },
     { id: 'maths', name: 'Mathématiques', group: 'gen', icon: 'sigma', color: '#2563eb', desc: 'Automatismes, statistiques, probabilités, suites, second degré, trigonométrie.' },
     { id: 'physique-chimie', name: 'Physique-Chimie', group: 'gen', icon: 'flask', color: '#7c3aed', desc: 'Signaux périodiques, puissance et énergie, ondes, chimie et sécurité.' },
     { id: 'anglais', name: 'Anglais', group: 'gen', icon: 'speech', color: '#0891b2', desc: 'Temps des verbes, verbes irréguliers, anglais technique informatique.' },

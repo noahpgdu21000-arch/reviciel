@@ -5,7 +5,7 @@ titre: EMC — Égalité, discriminations et fraternité
 chapitre: Enseignement moral et civique
 resume: Ce que garantit le principe d'égalité, comment la loi lutte contre les discriminations et ce que signifie la fraternité.
 mots-cles: égalité, discrimination, fraternité, solidarité, devise, DDHC, Constitution, Défenseur des droits, parité, Sécurité sociale, EMC
-ordre: 4
+ordre: 24
 ---
 
 ## La devise de la République

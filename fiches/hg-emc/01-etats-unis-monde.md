@@ -5,7 +5,7 @@ titre: Les États-Unis et le monde (1776-1945)
 chapitre: Histoire
 resume: De 13 colonies révoltées à la première puissance mondiale : indépendance, isolationnisme, crise de 1929 et entrée dans les guerres mondiales.
 mots-cles: États-Unis, indépendance, Constitution, doctrine Monroe, guerre de Sécession, isolationnisme, Wilson, krach 1929, New Deal, Pearl Harbor, superpuissance
-ordre: 1
+ordre: 21
 ---
 
 ## Problématique
