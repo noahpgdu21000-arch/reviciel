@@ -139,7 +139,9 @@
     let num = read ? 1 : 0, den = 1;
     if (f.cards.length) { num += mastered / f.cards.length; den++; }
     if (f.quiz.length) { num += q ? q.best / 100 : 0; den++; }
-    return { read, cards: f.cards.length, mastered, seen, due, quizBest: q ? q.best : null, quizCount: f.quiz.length, score: num / den };
+    const x = Store.state.quiz['x:' + f.id];
+    if (f.exercises && f.exercises.length) { num += x ? x.best / 100 : 0; den++; }
+    return { read, cards: f.cards.length, mastered, seen, due, quizBest: q ? q.best : null, quizCount: f.quiz.length, exBest: x ? x.best : null, score: num / den };
   }
   function subjectStats(sid) {
     const list = FICHES.filter((f) => f.subject === sid);

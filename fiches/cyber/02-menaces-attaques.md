@@ -57,6 +57,18 @@ ordre: 2
 > [!retenir]
 > Ver = se propage seul ; virus = besoin qu'on l'exécute ; rançongiciel = chiffre et demande une rançon. Le phishing vise l'**humain**. DDoS → disponibilité ; MITM → confidentialité et intégrité.
 
+=== EXERCICES ===
+# paires : Associe chaque malware à sa description
+- Virus = S'attache à un fichier et se propage quand on l'exécute
+- Ver = Se propage tout seul par le réseau
+- Cheval de Troie = Programme d'apparence normale qui cache une fonction malveillante
+- Rançongiciel = Chiffre les fichiers et réclame une rançon
+- Keylogger = Enregistre les frappes au clavier
+
+# classer : Indice de phishing ou e-mail normal ?
+Indice de phishing : ton urgent et menaçant, lien vers une adresse bizarre, demande de mot de passe, pièce jointe .exe inattendue
+Plutôt normal : expéditeur et lien du site officiel, aucune demande d'identifiants
+
 === CARTES ===
 Q: Différence entre un virus et un ver ?
 R: Le **virus** a besoin d'être exécuté (attaché à un fichier) ; le **ver** se propage **tout seul** par le réseau.

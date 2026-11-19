@@ -60,6 +60,14 @@ Il faut aussi **tester la restauration** : une sauvegarde qu'on ne sait pas rest
 > [!retenir]
 > Mot de passe long et unique + gestionnaire + MFA. Mises à jour. Sauvegardes 3-2-1. Moindre privilège. En cas d'attaque : isoler, prévenir, ne pas payer, porter plainte.
 
+=== EXERCICES ===
+# classer : Bon ou mauvais réflexe ?
+Bon réflexe : activer la double authentification, utiliser un gestionnaire de mots de passe, verrouiller sa session (Windows + L), faire des sauvegardes hors ligne
+Mauvais réflexe : réutiliser le même mot de passe partout, travailler avec un compte administrateur, payer la rançon, brancher une clé USB trouvée
+
+# trous : La règle de sauvegarde 3-2-1
+[[3|trois]] copies des données, sur [[2|deux]] supports différents, dont [[1|une]] copie hors site, idéalement hors ligne.
+
 === CARTES ===
 Q: Longueur minimale conseillée pour un mot de passe ?
 R: Au moins **12 caractères** (ou une phrase de passe de plusieurs mots).

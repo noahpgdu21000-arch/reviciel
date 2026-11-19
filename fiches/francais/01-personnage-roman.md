@@ -61,6 +61,22 @@ Le ==schéma actanciel== montre les forces autour du héros : le **sujet** cherc
 > [!astuce] À l'écrit
 > Appuie chaque idée sur une courte citation entre guillemets et explique toujours l'effet produit : « Le point de vue interne fait partager au lecteur les doutes du personnage. »
 
+=== EXERCICES ===
+# paires : Associe chaque point de vue à sa définition
+- Point de vue interne = On voit à travers les yeux d'un seul personnage
+- Point de vue externe = On voit de l'extérieur, comme une caméra
+- Point de vue omniscient = Le narrateur sait tout, même les pensées de chacun
+
+# ordre : Remets les étapes du schéma narratif dans l'ordre
+- Situation initiale
+- Élément perturbateur
+- Péripéties
+- Élément de résolution
+- Situation finale
+
+# trous : Complète
+Dans un récit au passé, le [[passé simple]] sert aux actions de premier plan et l'[[imparfait]] aux descriptions. L'[[auteur]] est la personne réelle qui écrit le livre ; le [[narrateur]] est la voix qui raconte.
+
 === CARTES ===
 Q: Quelle différence entre l'auteur et le narrateur ?
 R: L'**auteur** est la personne réelle qui écrit le livre ; le **narrateur** est la voix qui raconte l'histoire dans le texte.

@@ -55,6 +55,27 @@ Exemple : MTBF = 990 h et MTTR = 10 h → disponibilité = 990 / 1 000 = **99 %*
 > [!retenir]
 > Corrective = après la panne (palliative = provisoire, curative = définitive). Préventive = avant (systématique = calendrier, conditionnelle = état). Diagnostic : informations → évidences → hypothèses → tests → remède → vérification → documentation.
 
+=== EXERCICES ===
+# classer : Quel type de maintenance ?
+Corrective palliative : basculer sur un switch de secours en attendant la réparation, redémarrer un service planté
+Corrective curative : remplacer l'alimentation défectueuse
+Préventive systématique : dépoussiérer les serveurs tous les 6 mois, changer les batteries d'onduleur tous les 3 ans
+Préventive conditionnelle : remplacer un disque quand ses indicateurs SMART se dégradent
+
+# ordre : Remets la démarche de diagnostic dans l'ordre
+- Recueillir les informations
+- Vérifier les évidences
+- Émettre des hypothèses
+- Tester les hypothèses
+- Remédier
+- Vérifier avec l'utilisateur
+- Documenter
+
+# calcul : Disponibilité
+? MTBF = 990 h et MTTR = 10 h. Disponibilité (en %) ?
+= 99 %
+! 990 / (990 + 10) = 0,99.
+
 === CARTES ===
 Q: Différence entre maintenance palliative et curative ?
 R: **Palliative** = dépannage **provisoire** ; **curative** = réparation **définitive**.

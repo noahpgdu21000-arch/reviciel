@@ -54,6 +54,20 @@ Une ==figure de style== est une façon particulière d'utiliser les mots pour pr
 > [!retenir] La phrase type
 > « L'auteur utilise **[figure]** (« citation ») **pour** [effet : mettre en valeur…, montrer…, faire ressentir…]. »
 
+=== EXERCICES ===
+# paires : Associe chaque exemple à sa figure de style
+- Ses yeux brillent comme des étoiles = Comparaison
+- Cet homme est un lion = Métaphore
+- Je meurs de faim = Hyperbole
+- Va, je ne te hais point = Litote
+- Il nous a quittés = Euphémisme
+- Cette obscure clarté = Oxymore
+
+# classer : Classe ces figures de style
+Images (analogie) : comparaison, métaphore, personnification
+Insistance ou atténuation : hyperbole, litote, euphémisme, anaphore
+Opposition : antithèse, oxymore
+
 === CARTES ===
 Q: Différence entre comparaison et métaphore ?
 R: La **comparaison** utilise un outil (comme, tel…) ; la **métaphore** rapproche les deux éléments sans outil.

@@ -51,6 +51,7 @@
       html += '<div class="card section"><h2>Derniers quiz</h2><ul class="list-plain">' + recent.map((x) => {
         let name = 'Quiz mélangé';
         if (x.k.indexOf('f:') === 0) { const f = RC.fiche(x.k.slice(2)); name = f ? f.title : 'Fiche supprimée'; }
+        else if (x.k.indexOf('x:') === 0) { const f = RC.fiche(x.k.slice(2)); name = 'Exercices : ' + (f ? f.title : 'fiche supprimée'); }
         else if (x.k.indexOf('s:') === 0) { const s = RC.SUBJ[x.k.slice(2)]; name = 'Quiz ' + (s ? s.name : ''); }
         return '<li class="row between"><span>' + E(name) + ' <span class="small muted">· ' + x.d.split('-').reverse().join('/') + '</span></span><span class="badge ' + (x.p >= 80 ? 'ok' : x.p >= 50 ? 'warn' : 'bad') + '">' + x.p + ' %</span></li>';
       }).join('') + '</ul></div>';

@@ -76,6 +76,26 @@ NON (NOT) inverse chaque bit : NON 1010 = 0101.
 
 Entraîne-toi avec l'[exercice de conversions](#/entrainement/conversions).
 
+=== EXERCICES ===
+# trous : Convertis
+45 en binaire (8 bits) : [[00101101|101101]]
+0xA7 en binaire : [[10100111]]
+200 en hexadécimal : [[C8|0xC8]]
+
+# calcul : Calcule en décimal
+? 1100 1000 en décimal ?
+= 200
+? 0x2F en décimal ?
+= 47
+? Combien de valeurs peut prendre un nombre de 10 bits ?
+= 1024
+? Combien d'octets dans 2 Kio ?
+= 2048
+
+# classer : ET logique : quel est le résultat ?
+Résultat 1 : 1 ET 1
+Résultat 0 : 1 ET 0, 0 ET 1, 0 ET 0
+
 === CARTES ===
 Q: Combien de bits dans un octet ?
 R: **8 bits**.

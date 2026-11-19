@@ -56,6 +56,23 @@ Pour communiquer, deux machines doivent respecter les mêmes règles (==protocol
 > [!retenir]
 > 1 Physique (bits) · 2 Liaison (trames, MAC, switch) · 3 Réseau (paquets, IP, routeur) · 4 Transport (segments, ports, TCP/UDP) · 5-6-7 Session, Présentation, Application.
 
+=== EXERCICES ===
+# ordre : Remets les couches OSI dans l'ordre, de la couche 1 à la couche 7
+- Physique
+- Liaison de données
+- Réseau
+- Transport
+- Session
+- Présentation
+- Application
+
+# paires : Associe chaque élément à sa couche
+- Câble, fibre, hub = Couche 1 (physique)
+- Switch, adresse MAC, trame = Couche 2 (liaison)
+- Routeur, adresse IP, paquet = Couche 3 (réseau)
+- TCP, UDP, ports = Couche 4 (transport)
+- HTTP, DNS, DHCP = Couche 7 (application)
+
 === CARTES ===
 Q: Combien de couches dans le modèle OSI ?
 R: **7** couches.

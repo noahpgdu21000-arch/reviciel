@@ -50,6 +50,19 @@ L'être humain ==fabrique== (outils, machines, objets) et ==imagine== (histoires
 > [!astuce] Écrit d'invention
 > Pour imaginer une suite ou un récit : respecte le genre (indices du fantastique, vocabulaire scientifique en SF…), le point de vue et le temps du texte de départ, et soigne une **chute** surprenante.
 
+=== EXERCICES ===
+# classer : Classe chaque situation dans son genre
+Merveilleux : une fée transforme une citrouille en carrosse, un tapis volant emmène le héros
+Fantastique : le héros entend des pas la nuit et se demande s'il devient fou, un portrait semble bouger mais personne n'en est sûr
+Science-fiction : un sous-marin électrique explore les océans, des robots dirigent une colonie sur Mars
+
+# paires : Associe chaque forme poétique à sa définition
+- Alexandrin = Vers de 12 syllabes
+- Sonnet = 14 vers : 2 quatrains et 2 tercets
+- Rimes croisées = ABAB
+- Rimes embrassées = ABBA
+- Calligramme = Poème qui dessine ce dont il parle
+
 === CARTES ===
 Q: Qu'est-ce que le fantastique ?
 R: Un genre où un événement étrange fait **hésiter** le personnage (et le lecteur) entre une explication rationnelle et une explication surnaturelle.

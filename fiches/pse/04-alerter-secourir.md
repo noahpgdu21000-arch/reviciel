@@ -54,6 +54,25 @@ ordre: 4
 > [!astuce] Se former
 > La formation **PSC** (prévention et secours civiques) ou **SST** (sauveteur secouriste du travail, souvent proposée en bac pro) apprend ces gestes en quelques heures.
 
+=== EXERCICES ===
+# paires : Associe chaque numéro d'urgence
+- 15 = SAMU (urgence médicale)
+- 17 = Police ou gendarmerie
+- 18 = Pompiers
+- 112 = Numéro d'urgence européen
+- 114 = Urgence par SMS
+
+# ordre : Remets la conduite à tenir dans l'ordre
+- Protéger
+- Alerter
+- Secourir
+
+# classer : Quel geste pour quelle situation ?
+Mettre en PLS : victime inconsciente qui respire
+Massage cardiaque et défibrillateur : victime inconsciente qui ne respire pas
+Appuyer fortement sur la plaie : saignement abondant
+Refroidir à l'eau tempérée : brûlure
+
 === CARTES ===
 Q: Numéro du SAMU ?
 R: Le **15**.

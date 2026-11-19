@@ -30,7 +30,8 @@
   const HELP = '<details class="card section help"><summary><b>Aide : comment écrire une fiche ?</b></summary>' +
     '<p>Le texte s\'écrit en <b>Markdown</b> simplifié :</p><pre>## Titre de partie\n### Sous-titre\n**gras**   *italique*   ==surligné==   `code`\nH~2~O (indice)   x^2^ (exposant)\n- liste à puces\n1. liste numérotée\n| Colonne 1 | Colonne 2 |\n|---|---|\n| case | case |\n\n> [!retenir]      (aussi : definition, exemple,\n> Texte encadré     attention, astuce, formule)</pre>' +
     '<p>Ensuite, les <b>cartes mémoire</b> après la ligne <code>=== CARTES ===</code> :</p><pre>Q: La question\nR: La réponse (peut faire plusieurs lignes)</pre>' +
-    '<p>Et le <b>quiz</b> après <code>=== QUIZ ===</code> : une ligne <code>?</code> pour la question, <code>-</code> pour chaque mauvaise réponse, <code>+</code> pour la bonne, <code>!</code> pour l\'explication.</p></details>';
+    '<p>Et le <b>quiz</b> après <code>=== QUIZ ===</code> : une ligne <code>?</code> pour la question, <code>-</code> pour chaque mauvaise réponse, <code>+</code> pour la bonne, <code>!</code> pour l\'explication.</p>' +
+    '<p>Et des <b>exercices</b> après <code>=== EXERCICES ===</code> :</p><pre># trous : Complète\nLe droit de grève date de [[1864]].\n# ordre : Remets dans l\'ordre\n- premier\n- deuxième\n- troisième\n# paires : Associe\n- 15 = SAMU\n- 18 = Pompiers\n- 112 = Urgence européenne\n# classer : Classe\nPrimaire : agriculteur, pêcheur\nTertiaire : vendeuse, infirmier\n# calcul : Calcule\n? 230 V × 2 A = ? (en W)\n= 460 W\n! P = U × I</pre></details>';
 
   function newId() { return 'perso-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5); }
   function bodyOf(src) { return String(src || '').replace(/\r\n?/g, '\n').replace(/^---\n[\s\S]*?\n---[ \t]*(\n|$)/, '').replace(/^\n+/, ''); }

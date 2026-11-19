@@ -1,7 +1,7 @@
 /* RéviCIEL — service worker : garde tout le site sur l'appareil pour réviser sans connexion.
    La partie entre les marqueurs BUILD est réécrite par « node outils/build.js ». */
 // @@BUILD-START
-const VERSION = "2026-11-19-1ba55e0c";
+const VERSION = "2026-11-19-691516ea";
 const ASSETS = [
   "./",
   "index.html",
@@ -10,6 +10,7 @@ const ASSETS = [
   "js/app.js",
   "js/data.js",
   "js/editor.js",
+  "js/exercices.js",
   "js/labo.js",
   "js/labs.js",
   "js/markdown.js",

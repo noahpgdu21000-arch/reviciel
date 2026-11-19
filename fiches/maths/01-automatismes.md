@@ -64,6 +64,31 @@ Deux grandeurs sont ==proportionnelles== si on passe de l'une à l'autre en mult
 
 Entraîne-toi avec l'[exercice Pourcentages](#/entrainement/pourcentages).
 
+=== EXERCICES ===
+# calcul : Pourcentages et conversions
+? Un prix de 80 € augmente de 15 %. Nouveau prix (en €) ?
+= 92 €
+! 80 × 1,15 = 92 €.
+? Coefficient multiplicateur d'une baisse de 30 % ?
+= 0,7
+! 1 − 30/100 = 0,7.
+? Un abonnement passe de 25 € à 30 €. Taux d'évolution (en %) ?
+= 20 %
+! (30 − 25) / 25 × 100 = 20 %.
+? 90 km/h en m/s ?
+= 25 m/s
+! 90 / 3,6 = 25 m/s.
+? 4,7 kΩ en ohms ?
+= 4700 Ω
+! kilo = × 1 000.
+
+# paires : Associe chaque préfixe à sa valeur
+- kilo (k) = × 1 000
+- méga (M) = × 1 000 000
+- giga (G) = × 1 000 000 000
+- milli (m) = ÷ 1 000
+- micro (µ) = ÷ 1 000 000
+
 === CARTES ===
 Q: Coefficient multiplicateur d'une hausse de 20 % ?
 R: **1,2** (= 1 + 20/100).

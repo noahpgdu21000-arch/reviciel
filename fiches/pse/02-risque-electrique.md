@@ -83,6 +83,25 @@ Exemples : **B0**, **H0V**, **BS**, **BR**, **BE Mesurage**.
 > [!retenir]
 > 30 mA → paralysie respiratoire (d'où le DDR 30 mA). Contact direct = partie active ; indirect = masse en défaut. Habilitation délivrée par l'employeur. Consignation : séparer, condamner, identifier, VAT, MALT-CC.
 
+=== EXERCICES ===
+# ordre : Classe les effets du courant du plus faible au plus grave
+- Seuil de perception (0,5 mA)
+- Contraction musculaire, non-lâcher (10 mA)
+- Paralysie respiratoire (30 mA)
+- Fibrillation cardiaque (75 mA)
+- Arrêt cardiaque (1 A)
+
+# ordre : Remets les étapes de la consignation dans l'ordre
+- Séparer
+- Condamner
+- Identifier
+- Vérifier l'absence de tension (VAT)
+- Mettre à la terre et en court-circuit
+
+# classer : Contact direct ou indirect ?
+Contact direct : toucher un fil dénudé, mettre les doigts sur une borne sous tension
+Contact indirect : toucher la carcasse d'une machine en défaut, toucher le boîtier métallique d'un PC mal isolé
+
 === CARTES ===
 Q: Différence entre électrisation et électrocution ?
 R: L'**électrisation** est le passage du courant dans le corps ; l'**électrocution** est une électrisation **mortelle**.

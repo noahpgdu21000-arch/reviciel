@@ -58,6 +58,25 @@ Avantages : plusieurs serveurs sur une seule machine, tests sans risque, **insta
 > [!retenir]
 > CPU = calcule · RAM = mémoire de travail **volatile** · SSD/HDD = stockage **permanent** · UEFI + POST au démarrage · hyperviseur type 1 = sur le matériel, type 2 = sur un OS.
 
+=== EXERCICES ===
+# classer : Mémoire volatile ou stockage permanent ?
+Volatile (perdue à l'extinction) : RAM, mémoire cache
+Permanent : SSD NVMe, disque dur, clé USB
+
+# ordre : Remets le démarrage d'un PC dans l'ordre
+- Mise sous tension
+- UEFI et test du matériel (POST)
+- Chargeur d'amorçage
+- Chargement du noyau du système
+- Ouverture de la session
+
+# paires : Associe chaque composant à son rôle
+- Processeur = Exécute les instructions
+- RAM = Contient les programmes en cours
+- Carte mère = Relie tous les composants
+- Alimentation = Convertit le 230 V en tensions continues
+- Hyperviseur = Fait fonctionner des machines virtuelles
+
 === CARTES ===
 Q: Rôle de la carte mère ?
 R: **Relier** tous les composants entre eux (processeur, RAM, stockage, cartes d'extension).

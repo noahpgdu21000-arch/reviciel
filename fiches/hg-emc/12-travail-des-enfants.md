@@ -52,6 +52,26 @@ Au XIXe siècle, il est **normal** que les enfants des familles pauvres travaill
 > [!retenir]
 > Au XIXe siècle, les enfants pauvres travaillent dès 7-8 ans, 12 à 15 h par jour, dans les usines et les mines, car leur salaire aide la famille et ils coûtent peu. Les lois de **1841, 1874, 1892** et surtout l'**école obligatoire de Jules Ferry (1882)** font reculer leur travail.
 
+=== EXERCICES ===
+# trous : Complète
+Au XIXe siècle, les enfants pauvres travaillent souvent dès [[7|sept]] ou 8 ans. Dans les mines du Nord, on appelle les jeunes mineurs les [[galibots]]. En 1840, le docteur [[Villermé]] décrit leurs conditions terribles. La loi de [[1841]] interdit le travail des moins de 8 ans dans les grandes usines. Les lois [[Jules Ferry|Ferry]] rendent l'école obligatoire de 6 à 13 ans.
+
+# ordre : Remets les lois dans l'ordre
+- Interdiction du travail des moins de 8 ans dans les grandes usines (1841)
+- Interdiction avant 12 ans et premiers inspecteurs (1874)
+- École gratuite, obligatoire et laïque : lois Ferry (1881-1882)
+- Interdiction avant 13 ans et inspection du travail (1892)
+
+# paires : Associe chaque personne à ce qu'elle a fait
+- Villermé = Enquête sur les ouvriers du textile (1840)
+- Victor Hugo = Poème « Melancholia » (1856)
+- Émile Zola = Roman « Germinal » (1885)
+- Jules Ferry = Lois sur l'école obligatoire (1881-1882)
+
+# classer : Pourquoi fait-on travailler les enfants ? Classe les raisons
+Pour les familles : besoin du salaire de l'enfant, grande pauvreté
+Pour les patrons : main-d'œuvre bon marché, enfants obéissants, petite taille utile dans les mines
+
 === CARTES ===
 Q: À quel âge les enfants pauvres commencent-ils à travailler au XIXe siècle ?
 R: Souvent **dès 7 ou 8 ans**.

@@ -438,6 +438,45 @@ p { margin: 0 0 .8em; }
 .bits div { background: var(--surface); border-radius: 6px; padding: 4px 0; }
 .bits div.on { background: var(--primary); color: var(--on-primary); font-weight: 700; }
 
+/* ---------- Exercices des fiches ---------- */
+.exo-list { display: grid; gap: 16px; margin-top: 16px; }
+.exo-head { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; }
+.exo-head .s-icon { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; color: var(--primary); background: var(--primary-soft); flex: none; }
+.exo-head .s-icon svg { width: 20px; height: 20px; }
+.exo-head .kicker { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--text-3); }
+.exo-head h3 { margin: 2px 0 0; font-size: 1.02rem; }
+.exo-text { line-height: 2.2; max-width: none; }
+.blank { display: inline-block; width: auto; min-height: 34px; padding: 2px 8px; margin: 0 2px; border-radius: 8px; font: inherit; font-weight: 600; text-align: center; vertical-align: baseline; }
+.blank.ok, .pair.ok select, .calc-q.ok .calc-in { border-color: var(--success); background: var(--success-soft); }
+.blank.ko, .pair.ko select, .calc-q.ko .calc-in { border-color: var(--danger); background: var(--danger-soft); }
+.pairs { display: grid; gap: 8px; }
+.pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 10px; align-items: center; padding: 8px 10px; border-radius: 10px; background: var(--surface-2); }
+.pair .pl { font-weight: 600; }
+.pair select { min-height: 40px; padding: 6px 10px; }
+@media (max-width: 560px) { .pair { grid-template-columns: 1fr; } }
+.order { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.order li { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 10px; background: var(--surface-2); border: 2px solid transparent; }
+.order li.ok { border-color: var(--success); background: var(--success-soft); }
+.order li.ko { border-color: var(--danger); background: var(--danger-soft); }
+.ord-n { flex: none; width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center; font-weight: 700; font-size: .8rem; background: var(--surface); }
+.ord-t { flex: 1; min-width: 0; }
+.ord-b { display: flex; gap: 4px; flex: none; }
+.ord-b .icon-btn { width: 36px; height: 36px; border: 1px solid var(--border); background: var(--surface); font-size: .8rem; }
+.ord-b .icon-btn:disabled { opacity: .35; }
+.calc { display: grid; gap: 14px; }
+.calc-q { padding: 10px 12px; border-radius: 10px; background: var(--surface-2); border: 2px solid transparent; }
+.calc-q.ok { border-color: var(--success); }
+.calc-q.ko { border-color: var(--danger); }
+.calc-q .md { font-size: .98rem; margin-bottom: 8px; max-width: none; }
+.calc-q .md p:last-child { margin: 0; }
+.calc-in { max-width: 180px; font-family: var(--mono); }
+.calc-q .unit { font-weight: 600; color: var(--text-2); }
+.calc-fb { margin-top: 6px; font-size: .9rem; }
+.exo-fb { margin-top: 14px; padding: 12px 14px; border-radius: 12px; background: var(--surface-2); border-left: 4px solid var(--primary); }
+.exo-fb.good { border-color: var(--success); background: var(--success-soft); }
+.exo-fb.bad { border-color: var(--warning); background: var(--warning-soft); }
+.exo-actions { margin-top: 14px; }
+
 /* ---------- Labo réseau ---------- */
 .lvl { display: inline-block; font-size: .78rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--c); background: color-mix(in srgb, var(--c) 13%, var(--surface)); padding: 3px 10px; border-radius: 999px; }
 .section-head h2 .lvl { font-size: .85rem; }

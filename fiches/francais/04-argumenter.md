@@ -61,6 +61,19 @@ Plans possibles : **dialectique** (pour / contre / synthèse), **thématique** (
 > [!retenir]
 > **Un paragraphe = un argument + une explication + un exemple.** Les connecteurs logiques montrent le raisonnement au lecteur.
 
+=== EXERCICES ===
+# classer : Classe chaque connecteur selon son rôle
+Cause : car, parce que, puisque
+Conséquence : donc, c'est pourquoi, par conséquent
+Opposition : mais, cependant, pourtant
+Ajout : de plus, en outre, par ailleurs
+
+# ordre : Remets le paragraphe argumentatif dans l'ordre
+- Tout d'abord, les réseaux sociaux permettent de garder le contact avec ses proches.
+- En effet, ils effacent la distance : un message ou un appel vidéo suffit.
+- Par exemple, un apprenti en stage loin de chez lui peut échanger chaque soir avec sa famille.
+- Ainsi, ces outils renforcent les liens.
+
 === CARTES ===
 Q: Qu'est-ce que la thèse ?
 R: L'**opinion** que défend l'auteur sur le sujet.

@@ -61,6 +61,19 @@ En **commutation**, le transistor est soit **bloqué** (interrupteur ouvert), so
 > [!retenir]
 > Électrolytique = polarisé · τ = RC · diode : anode → cathode (anneau), seuil 0,6-0,7 V · LED : R = (U~alim~ − U~LED~) / I · transistor = interrupteur commandé · relais + diode de roue libre.
 
+=== EXERCICES ===
+# calcul : Résistance de protection et constante de temps
+? LED rouge (2 V, 20 mA) alimentée en 5 V. R (en Ω) ?
+= 150 Ω
+? LED bleue (3 V, 10 mA) alimentée en 5 V. R (en Ω) ?
+= 200 Ω
+? R = 10 kΩ et C = 47 µF. Constante de temps τ (en s) ?
+= 0,47 s
+
+# classer : Capteur ou actionneur ?
+Capteur : LDR, thermistance CTN, capteur à ultrasons HC-SR04, détecteur de mouvement PIR
+Actionneur : servomoteur, moteur à courant continu, buzzer, relais
+
 === CARTES ===
 Q: Dans quel sens passe le courant dans une diode ?
 R: De l'**anode** vers la **cathode** (repérée par un anneau).

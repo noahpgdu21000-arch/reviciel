@@ -50,6 +50,23 @@ Quand les points du nuage sont ==à peu près alignés==, on peut les remplacer 
 > [!retenir]
 > Nuage de points → point moyen G (x̄ ; ȳ) → droite d'ajustement y = ax + b (qui passe par G) → prévisions par interpolation ou extrapolation.
 
+=== EXERCICES ===
+# calcul : Point moyen et prévision
+? Les x valent 1, 2, 3, 4, 5. Calcule x̄.
+= 3
+? Les y valent 10, 14, 15, 19, 22. Calcule ȳ.
+= 16
+! (10 + 14 + 15 + 19 + 22) / 5 = 80 / 5 = 16.
+? La droite d'ajustement est y = 2,9x + 7,3. Estime y pour x = 8.
+= 30,5
+! 2,9 × 8 + 7,3 = 23,2 + 7,3 = 30,5.
+
+# paires : Associe chaque mot à sa définition
+- Nuage de points = Les couples (x ; y) placés dans un repère
+- Point moyen = Le point de coordonnées (x̄ ; ȳ)
+- Interpolation = Estimation à l'intérieur de la plage des données
+- Extrapolation = Prévision en dehors de la plage des données
+
 === CARTES ===
 Q: Qu'est-ce qu'un nuage de points ?
 R: La représentation d'une série à deux variables : chaque couple (x~i~ ; y~i~) donne un point dans un repère.

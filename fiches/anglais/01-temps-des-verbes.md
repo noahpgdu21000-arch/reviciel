@@ -58,6 +58,16 @@ ordre: 1
 > [!retenir]
 > Maintenant → present continuous. Habitude → present simple. Passé daté → past simple. Passé lié au présent (since/for, already, yet, ever) → present perfect.
 
+=== EXERCICES ===
+# trous : Conjugue le verbe au bon temps
+Look! The technician [[is repairing|'s repairing]] (repair) the router right now. Every morning, she [[checks]] (check) the servers. Yesterday, I [[installed]] (install) a new switch. I [[have worked|have been working|'ve worked]] (work) here since 2023. Tomorrow, I think it [[will rain|'ll rain]] (rain).
+
+# classer : Classe les mots repères selon le temps
+Present simple : always, usually, every day
+Present continuous : now, at the moment, Look!
+Past simple : yesterday, last week, two days ago
+Present perfect : since, already, yet
+
 === CARTES ===
 Q: Quand utilise-t-on le present continuous ?
 R: Pour une action **en cours au moment où l'on parle** (now, at the moment) ou temporaire.

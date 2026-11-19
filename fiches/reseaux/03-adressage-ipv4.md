@@ -83,6 +83,25 @@ La ==passerelle par défaut== (*default gateway*) est l'adresse IP du ==routeur=
 > [!info] Les classes (historique)
 > On entend encore parler de classes : A (1 à 126, /8), B (128 à 191, /16), C (192 à 223, /24). Aujourd'hui on utilise le ==CIDR== : le masque peut être n'importe quel /n.
 
+=== EXERCICES ===
+# calcul : Adressage IPv4
+? Combien d'hôtes dans un réseau /26 ?
+= 62
+? Combien d'hôtes dans un réseau /29 ?
+= 6
+? 192.168.1.130/25 : dernier octet de l'adresse réseau ?
+= 128
+? 10.0.0.77/27 : dernier octet de l'adresse de broadcast ?
+= 95
+! Nombre magique 32 : 77 est dans le bloc de 64 à 95.
+
+# trous : Complète
+Le masque /24 s'écrit 255.255.255.[[0]] et le masque /27 s'écrit 255.255.255.[[224]]. Une adresse en 169.254.x.x est une adresse [[APIPA]] : le PC n'a pas obtenu d'adresse du serveur [[DHCP]].
+
+# classer : Adresse privée ou publique ?
+Privée : 192.168.1.10, 10.5.20.1, 172.20.0.5
+Publique : 8.8.8.8, 80.12.1.5, 172.40.0.1
+
 === CARTES ===
 Q: Sur combien de bits est codée une adresse IPv4 ?
 R: Sur **32 bits**, soit 4 octets (ex. 192.168.1.10).

@@ -65,6 +65,30 @@ L'==adresse MAC== (adresse physique) identifie une carte réseau. Elle fait **48
 > [!retenir]
 > Switch = niveau 2, adresses **MAC**, dans un même réseau. Routeur = niveau 3, adresses **IP**, entre réseaux. RJ45 : 100 m max. 1 octet = 8 bits.
 
+=== EXERCICES ===
+# paires : Associe chaque équipement à son rôle
+- Switch = Relie les machines d'un même réseau grâce aux adresses MAC
+- Routeur = Relie des réseaux différents grâce aux adresses IP
+- Point d'accès = Connecte les appareils Wi-Fi au réseau filaire
+- Pare-feu = Filtre le trafic selon des règles
+
+# ordre : Remets les fils de la norme T568B dans l'ordre (broche 1 à 8)
+- Blanc-orange
+- Orange
+- Blanc-vert
+- Bleu
+- Blanc-bleu
+- Vert
+- Blanc-marron
+- Marron
+
+# calcul : Débits et transferts
+? 100 Mbit/s correspondent à combien de Mo/s ?
+= 12,5 Mo/s
+? Combien de secondes pour transférer 500 Mo à 100 Mbit/s (en théorie) ?
+= 40 s
+! 500 × 8 = 4 000 Mbit ; 4 000 / 100 = 40 s.
+
 === CARTES ===
 Q: Qu'est-ce qu'un LAN ?
 R: Un **réseau local** (maison, entreprise, lycée).

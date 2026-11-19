@@ -57,6 +57,22 @@ La lumière est guidée dans le cœur en verre par ==réflexion totale== sur la 
 > [!retenir]
 > Son : onde mécanique, besoin d'un milieu, ≈ 340 m/s dans l'air, audible de 20 Hz à 20 kHz. Ondes électromagnétiques : se propagent dans le vide à 3 × 10^8^ m/s, λ = c/f, du radio aux rayons gamma.
 
+=== EXERCICES ===
+# calcul : Ondes
+? Longueur d'onde du Wi-Fi à 5 GHz (en cm), avec c = 3 × 10^8^ m/s ?
+= 6 cm
+! λ = 3 × 10^8^ / 5 × 10^9^ = 0,06 m = 6 cm.
+? Un écho revient après 0,02 s dans l'air (340 m/s). Distance de l'obstacle (en m) ?
+= 3,4 m
+! d = 340 × 0,02 / 2 = 3,4 m.
+? Longueur d'onde d'une radio FM à 100 MHz (en m) ?
+= 3 m
+
+# classer : Classe ces sons
+Infrasons (moins de 20 Hz) : 5 Hz, 15 Hz
+Sons audibles : 440 Hz, 2 000 Hz, 15 000 Hz
+Ultrasons (plus de 20 kHz) : 40 kHz, 50 000 Hz
+
 === CARTES ===
 Q: Le son peut-il se propager dans le vide ?
 R: **Non** : c'est une onde mécanique, il lui faut un milieu matériel.

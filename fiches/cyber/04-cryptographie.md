@@ -62,6 +62,18 @@ Une ==fonction de hachage== calcule une **empreinte** (un « résumé ») de tai
 > [!retenir]
 > Symétrique = 1 clé partagée (AES, rapide). Asymétrique = clé publique + clé privée (RSA). Hachage = empreinte irréversible (SHA-256) pour l'intégrité. Certificat = clé publique + identité, signé par une AC.
 
+=== EXERCICES ===
+# paires : Associe chaque notion
+- AES = Chiffrement symétrique
+- RSA = Chiffrement asymétrique
+- SHA-256 = Fonction de hachage
+- Base64 = Simple codage, sans sécurité
+- Certificat = Associe une clé publique à une identité
+
+# trous : Chiffre de César avec un décalage de 3
+CIEL devient [[FLHO]]. RESEAU devient [[UHVHDX]].
+! Chaque lettre avance de 3 rangs dans l'alphabet : A → D, B → E…
+
 === CARTES ===
 Q: Différence entre chiffrement symétrique et asymétrique ?
 R: **Symétrique** : une seule clé secrète partagée. **Asymétrique** : une paire clé publique / clé privée.

@@ -68,6 +68,25 @@ Enregistrements : **A** (nom → IPv4), **AAAA** (nom → IPv6), **CNAME** (alia
 > [!retenir]
 > DHCP = adresse automatique (DORA, UDP 67/68). DNS = nom → IP (port 53). ARP = IP → MAC. ICMP = ping. HTTP 80, HTTPS 443, SSH 22.
 
+=== EXERCICES ===
+# paires : Associe chaque port à son service
+- 22 = SSH
+- 53 = DNS
+- 80 = HTTP
+- 443 = HTTPS
+- 67 et 68 = DHCP
+- 3389 = Bureau à distance (RDP)
+
+# ordre : Remets les messages DHCP dans l'ordre (DORA)
+- Discover : le client cherche un serveur
+- Offer : le serveur propose une adresse
+- Request : le client demande l'adresse proposée
+- Acknowledge : le serveur confirme
+
+# classer : TCP ou UDP ?
+TCP : navigation web (HTTPS), SSH, envoi de mails
+UDP : DNS, streaming vidéo en direct, jeux en ligne, DHCP
+
 === CARTES ===
 Q: Différence principale entre TCP et UDP ?
 R: **TCP** est connecté et fiable (accusés de réception) ; **UDP** est non connecté, plus rapide mais sans garantie.

@@ -58,6 +58,24 @@ print(round(u, 2))  # 1159.27
 > [!retenir]
 > Arithmétique : **+ r** à chaque étape, u~n~ = u~0~ + nr. Géométrique : **× q** à chaque étape, u~n~ = u~0~ × q^n^. Une évolution de t % par étape donne une suite géométrique de raison 1 ± t/100.
 
+=== EXERCICES ===
+# calcul : Suites arithmétiques et géométriques
+? Suite arithmétique : u~0~ = 4 et r = 3. Calcule u~5~.
+= 19
+! u~5~ = 4 + 5 × 3 = 19.
+? Suite géométrique : u~0~ = 2 et q = 3. Calcule u~4~.
+= 162
+! 2 × 3^4^ = 2 × 81 = 162.
+? 1 000 € placés à 2 % par an (intérêts composés). Capital après 3 ans (en €) ?
+= 1061,21 € ± 0,02
+! 1 000 × 1,02^3^ ≈ 1 061,21 €.
+? Raison de la suite géométrique pour une baisse de 5 % par an ?
+= 0,95
+
+# classer : Arithmétique ou géométrique ?
+Arithmétique : 5 / 8 / 11 / 14, 100 / 90 / 80 / 70, un salaire qui augmente de 50 € par an
+Géométrique : 3 / 6 / 12 / 24, 1000 / 500 / 250 / 125, un prix qui augmente de 2 % par an
+
 === CARTES ===
 Q: Relation de récurrence d'une suite arithmétique ?
 R: u~n+1~ = u~n~ + r (on ajoute toujours la raison r).

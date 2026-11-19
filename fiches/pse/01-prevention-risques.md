@@ -59,6 +59,18 @@ ordre: 1
 > [!retenir]
 > Supprimer le danger d'abord, puis protection **collective**, puis **EPI**. Risque = probabilité × gravité. Danger grave et imminent → droit de retrait.
 
+=== EXERCICES ===
+# classer : Classe chaque mesure de prévention
+Prévention intrinsèque (supprimer le danger) : remplacer un produit toxique par un produit sans danger, travailler hors tension
+Protection collective : garde-corps, aspiration des fumées, disjoncteur différentiel
+Protection individuelle (EPI) : gants, lunettes de protection, casque antibruit
+
+# ordre : Remets le processus d'apparition du dommage dans l'ordre
+- Danger
+- Situation dangereuse (une personne est exposée)
+- Événement dangereux
+- Dommage
+
 === CARTES ===
 Q: Différence entre danger et risque ?
 R: Le **danger** est ce qui peut causer un dommage ; le **risque** est la possibilité que le dommage arrive (probabilité × gravité).

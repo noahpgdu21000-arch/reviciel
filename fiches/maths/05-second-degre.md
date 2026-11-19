@@ -57,6 +57,28 @@ Graphiquement, les solutions de f(x) = 0 sont les ==abscisses des points où la 
 > [!retenir]
 > Δ = b² − 4ac → Δ > 0 : 2 solutions ; Δ = 0 : 1 solution ; Δ < 0 : aucune. Sommet en x = −b/(2a).
 
+=== EXERCICES ===
+# calcul : Discriminant et solutions
+? f(x) = x² − 5x + 6. Calcule Δ.
+= 1
+! Δ = (−5)² − 4 × 1 × 6 = 25 − 24 = 1.
+? Plus petite solution de x² − 5x + 6 = 0 ?
+= 2
+? Plus grande solution ?
+= 3
+! x = (5 ± 1) / 2 : 2 et 3.
+? Abscisse du sommet de f(x) = 2x² − 8x + 1 ?
+= 2
+! x~S~ = −b/(2a) = 8/4 = 2.
+? Δ de x² + 2x + 5 ?
+= -16
+! 4 − 20 = −16 : aucune solution réelle.
+
+# classer : Combien de solutions à ax² + bx + c = 0 ?
+Deux solutions : Δ = 16, Δ = 1
+Une seule solution : Δ = 0
+Aucune solution réelle : Δ = −4, Δ = −25
+
 === CARTES ===
 Q: Forme d'une fonction polynôme du second degré ?
 R: f(x) = ax² + bx + c avec **a ≠ 0**.

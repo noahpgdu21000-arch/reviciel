@@ -48,6 +48,25 @@ Elle réclame aussi l'**égalité des salaires**, le droit pour une femme marié
 > [!retenir]
 > Hubertine Auclert (1848-1914), première suffragette française, fonde *La Citoyenne* (1881), fait la grève de l'impôt (« pas de vote, pas d'impôt ») et réclame l'égalité des droits et des salaires. Les femmes obtiennent le droit de vote en **1944**.
 
+=== EXERCICES ===
+# trous : Complète le portrait
+Hubertine Auclert est née en [[1848]] et morte en [[1914]]. Elle se bat pour le droit de [[vote]] des femmes : c'est une [[suffragette]]. En 1881, elle crée le journal « [[La Citoyenne]] ». Les Françaises obtiennent le droit de vote en [[1944]].
+
+# ordre : Remets la vie d'Hubertine Auclert dans l'ordre
+- Naissance (1848)
+- Elle fonde l'association « Le Droit des femmes » (1876)
+- Grève de l'impôt (1880)
+- Création du journal La Citoyenne (1881)
+- Elle renverse une urne aux élections (1908)
+- Mort d'Hubertine Auclert (1914)
+- Droit de vote des femmes (1944)
+
+# paires : Associe chaque action à son but
+- Grève de l'impôt = Dénoncer des impôts payés sans droit de vote
+- Le journal La Citoyenne = Faire connaître le combat pour les droits des femmes
+- Déchirer le Code civil (1904) = Protester contre la soumission de la femme mariée
+- Renverser une urne (1908) = Attirer l'attention sur le vote réservé aux hommes
+
 === CARTES ===
 Q: Dates de naissance et de mort d'Hubertine Auclert ?
 R: **1848 – 1914**

@@ -57,6 +57,24 @@ Elle permet à chacun de vérifier que le poste convient. Pendant l'essai, le co
 > [!retenir]
 > Contrat de travail = travail + salaire + **subordination**. Le CDI est la norme. 35 h légales, heures sup à +25 % puis +50 %, 5 semaines de congés payés.
 
+=== EXERCICES ===
+# calcul : Salaire et heures supplémentaires
+? Taux horaire 12 € brut. Salaire brut pour 35 h (en €) ?
+= 420 €
+? Même salarié : 4 heures supplémentaires majorées de 25 %. Combien rapportent-elles (en €) ?
+= 60 €
+! 4 × 12 × 1,25 = 60 €.
+? Un CDD a rapporté 6 000 € brut au total. Prime de précarité (en €) ?
+= 600 €
+? Combien de jours ouvrables de congés pour 12 mois travaillés ?
+= 30
+! 2,5 × 12 = 30 jours ouvrables, soit 5 semaines.
+
+# classer : CDI, CDD ou intérim ?
+CDI : forme normale du contrat, pas de date de fin
+CDD : écrit obligatoire avec un motif, 18 mois maximum en général
+Intérim : relation à trois avec une agence, indemnité de fin de mission
+
 === CARTES ===
 Q: Les 3 éléments du contrat de travail ?
 R: Une **prestation de travail**, une **rémunération** et un **lien de subordination**.

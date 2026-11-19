@@ -50,6 +50,17 @@ Effets possibles : ==fatigue visuelle== (yeux secs, picotements, maux de tête),
 > [!retenir]
 > Écran à un bras de distance, haut de l'écran à hauteur des yeux, pauses. TMS = 1re maladie professionnelle. Bruit : 80 dB(A) → protections disponibles, 85 dB(A) → port obligatoire.
 
+=== EXERCICES ===
+# calcul : Bruit et écran
+? À partir de combien de dB(A) le port des protections auditives est-il obligatoire ?
+= 85 dB(A)
+? Règle 20-20-20 : toutes les combien de minutes faut-il regarder au loin ?
+= 20 min
+
+# classer : Bonne ou mauvaise pratique ?
+Bonne pratique : écran à 50-70 cm, haut de l'écran à hauteur des yeux, pauses régulières, porter une charge dos droit
+Mauvaise pratique : écran face à la fenêtre, poignets cassés sur le clavier, musique au casque à fond, soulever une charge dos rond
+
 === CARTES ===
 Q: À quelle distance placer son écran ?
 R: À **50-70 cm** des yeux (environ un bras tendu).

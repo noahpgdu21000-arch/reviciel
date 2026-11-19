@@ -83,6 +83,25 @@ L'utilisateur ==root== a tous les droits : on l'utilise le moins possible (via `
 > [!retenir]
 > Linux : `/etc` = configuration, `/home` = utilisateurs, `/var/log` = journaux. Droits rwx = 4, 2, 1 → `chmod 755`. Windows : NTFS, Gestionnaire des tâches, services.msc, PowerShell.
 
+=== EXERCICES ===
+# paires : Associe chaque commande Linux à son action
+- pwd = Afficher le dossier courant
+- ls -l = Lister avec les droits
+- mkdir = Créer un dossier
+- rm = Supprimer
+- sudo = Exécuter en administrateur
+- chmod = Modifier les droits
+
+# calcul : Droits Linux en notation octale
+? rwxr-xr-x en octal ?
+= 755
+? rw-r--r-- en octal ?
+= 644
+? rw-r----- en octal ?
+= 640
+? rwx------ en octal ?
+= 700
+
 === CARTES ===
 Q: Quel dossier Linux contient les fichiers de configuration ?
 R: **/etc**

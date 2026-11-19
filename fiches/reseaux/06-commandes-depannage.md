@@ -70,6 +70,23 @@ R1# copy running-config startup-config
 > [!retenir]
 > Dépanner du bas vers le haut : câble → configuration IP → ping 127.0.0.1 → ping passerelle → ping 8.8.8.8 → ping d'un nom (DNS). 169.254.x.x = problème DHCP.
 
+=== EXERCICES ===
+# ordre : Remets la méthode de dépannage dans l'ordre
+- Vérifier le câble et les voyants
+- Vérifier la configuration IP (ipconfig)
+- ping 127.0.0.1
+- ping de la passerelle
+- ping d'une adresse sur Internet (8.8.8.8)
+- ping d'un nom (test du DNS)
+
+# paires : Associe chaque besoin à sa commande
+- Voir la configuration IP détaillée sous Windows = ipconfig /all
+- Interroger le DNS = nslookup
+- Voir le chemin vers une destination = tracert
+- Renouveler l'adresse DHCP = ipconfig /renew
+- Voir l'état des interfaces d'un routeur Cisco = show ip interface brief
+- Enregistrer la configuration Cisco = copy running-config startup-config
+
 === CARTES ===
 Q: Commande Windows pour voir la configuration IP complète ?
 R: **ipconfig /all**

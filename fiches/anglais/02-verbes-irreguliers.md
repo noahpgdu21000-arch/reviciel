@@ -75,6 +75,23 @@ ordre: 2
 > [!retenir]
 > Les incontournables : **go-went-gone**, **do-did-done**, **see-saw-seen**, **take-took-taken**, **make-made-made**, **write-wrote-written**, **send-sent-sent**, **buy-bought-bought**.
 
+=== EXERCICES ===
+# trous : Écris le prétérit puis le participe passé
+go → [[went]] → [[gone]]
+buy → [[bought]] → [[bought]]
+write → [[wrote]] → [[written]]
+take → [[took]] → [[taken]]
+think → [[thought]] → [[thought]]
+forget → [[forgot]] → [[forgotten]]
+
+# paires : Associe la base verbale et son participe passé
+- see = seen
+- speak = spoken
+- break = broken
+- teach = taught
+- choose = chosen
+- send = sent
+
 === CARTES ===
 Q: go
 R: go – **went** – **gone** (aller)

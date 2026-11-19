@@ -70,6 +70,24 @@ Un signal ==PWM== est un signal carré de fréquence fixe dont on fait varier la
 > [!retenir]
 > ET = tous à 1 · OU = au moins un à 1 · XOR = différents · CAN n bits → 2^n^ valeurs, q = V~ref~ / 2^n^ · PWM : U~moy~ = α × V~cc~.
 
+=== EXERCICES ===
+# calcul : CAN et PWM
+? CAN 10 bits : nombre de valeurs possibles ?
+= 1024
+? CAN 8 bits sur 5 V : quantum (en mV) ?
+= 19,5 mV ± 0,1
+? analogRead renvoie 512 (CAN 10 bits, 5 V). Tension (en V) ?
+= 2,5 V ± 0,01
+? PWM 5 V avec un rapport cyclique de 40 %. Tension moyenne (en V) ?
+= 2 V
+
+# paires : Associe chaque porte logique à sa règle
+- ET (AND) = 1 seulement si toutes les entrées sont à 1
+- OU (OR) = 1 si au moins une entrée est à 1
+- NON (NOT) = Inverse l'entrée
+- OU exclusif (XOR) = 1 si les entrées sont différentes
+- NON-ET (NAND) = 0 seulement si toutes les entrées sont à 1
+
 === CARTES ===
 Q: Quand la sortie d'une porte ET vaut-elle 1 ?
 R: Seulement quand **toutes les entrées** sont à 1.

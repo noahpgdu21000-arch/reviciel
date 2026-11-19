@@ -55,6 +55,19 @@ On parle aussi d'**authentification** : vérifier qu'une personne est bien celle
 > [!retenir]
 > DICT = Disponibilité, Intégrité, Confidentialité, Traçabilité. Risque = menace × vulnérabilité → impact. ANSSI (État), CNIL (données personnelles), cybermalveillance.gouv.fr (victimes). Intrusion = délit (loi Godfrain).
 
+=== EXERCICES ===
+# classer : Quel critère DICT est touché ?
+Disponibilité : un site saturé par une attaque DDoS, un serveur en panne toute la journée
+Intégrité : des notes modifiées dans la base de données, le montant d'un virement changé
+Confidentialité : une fuite de fichiers clients, un mot de passe lu par un collègue
+Traçabilité : aucun journal pour savoir qui s'est connecté
+
+# paires : Associe chaque organisme à son rôle
+- ANSSI = Autorité nationale de la sécurité des systèmes d'information
+- CNIL = Protection des données personnelles
+- Cybermalveillance.gouv.fr = Assistance aux victimes
+- CERT-FR = Alertes sur les failles de sécurité
+
 === CARTES ===
 Q: Que signifie DICT ?
 R: **D**isponibilité, **I**ntégrité, **C**onfidentialité, **T**raçabilité.

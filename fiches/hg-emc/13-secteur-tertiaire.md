@@ -45,6 +45,21 @@ C'est la ==tertiarisation== de l'économie : en France, environ ==3 emplois sur 
 > [!retenir]
 > Primaire = ressources naturelles, secondaire = fabrication, tertiaire = services. Depuis la fin du XIXe siècle, les employés, fonctionnaires et vendeurs se multiplient, et beaucoup de ces emplois sont occupés par des femmes. Aujourd'hui, environ 3 emplois sur 4 sont dans le tertiaire.
 
+=== EXERCICES ===
+# classer : Classe chaque métier dans son secteur d'activité
+Primaire : agriculteur, pêcheur, éleveur
+Secondaire : ouvrier d'usine, maçon, soudeur
+Tertiaire : vendeuse, institutrice, technicien réseau, infirmier
+
+# trous : Complète
+Le secteur [[tertiaire]] regroupe les métiers de services. Les employés de bureau sont appelés les « [[cols blancs]] », alors que les ouvriers sont les « cols bleus ». Après les lois Ferry, le nombre d'[[institutrices|instituteurs]] augmente fortement. Aujourd'hui, environ [[3|trois]] emplois sur 4 sont dans le tertiaire.
+
+# paires : Associe chaque métier à ce qui l'a fait naître
+- Vendeuse = Les grands magasins
+- Institutrice = L'école obligatoire (lois Ferry)
+- Dactylographe = La machine à écrire
+- Téléphoniste = Le téléphone
+
 === CARTES ===
 Q: Qu'est-ce que le secteur tertiaire ?
 R: Le secteur des **services** (commerce, banque, transports, enseignement, santé, administration…).

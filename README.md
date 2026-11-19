@@ -12,7 +12,9 @@ et l'enseignement professionnel CIEL. Une fois ouverte une première fois, l'app
 - **Quiz** par fiche, par matière, ou mélangé, avec corrections expliquées
 - **Labo réseau** : un simulateur de switchs et routeurs avec les commandes Cisco IOS (comme dans Packet Tracer),
   13 labs avec cours, du niveau débutant au niveau difficile (VLAN, trunk, routage, DHCP, SSH, ACL, dépannage), objectifs vérifiés automatiquement
-- **5 exercices générés à l'infini** et corrigés pas à pas : adressage IPv4, binaire/hexa, loi d'Ohm, code couleur des résistances, pourcentages
+- **120 exercices dans les fiches** (toutes les matières) : textes à trous, remises en ordre (frises), associations, classements, calculs
+- **9 exercices générés à l'infini** et corrigés pas à pas : adressage IPv4, binaire/hexa, loi d'Ohm, code couleur des résistances, pourcentages,
+  verbes irréguliers, signaux et énergie, suites et second degré, salaire et heures sup
 - **Mode caché** (les mots clés surlignés deviennent des trous à deviner), lecture à voix haute, impression
 - **Mes fiches** : crée tes propres fiches (avec cartes et quiz), importe/exporte-les
 - Progression par matière, série de jours, recherche, favoris, thème clair/sombre
@@ -86,6 +88,25 @@ R: La réponse
 - mauvaise réponse
 + bonne réponse
 ! Explication affichée après la réponse
+
+=== EXERCICES ===
+# trous : Complète
+Le droit de grève date de [[1864]].
+# ordre : Remets dans l'ordre (écrits dans le bon ordre, affichés mélangés)
+- premier
+- deuxième
+- troisième
+# paires : Associe
+- 15 = SAMU
+- 18 = Pompiers
+- 112 = Urgence européenne
+# classer : Classe
+Primaire : agriculteur, pêcheur
+Tertiaire : vendeuse, infirmier
+# calcul : Calcule
+? 230 V × 2 A = ? (en W)
+= 460 W
+! P = U × I
 ```
 
 ## Organisation du projet

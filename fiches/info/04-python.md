@@ -101,6 +101,29 @@ for p in ports:
 > [!retenir]
 > `input()` renvoie du texte · `for` = nombre de tours connu · `while` = tant que · `def` + `return` pour une fonction · les indices de liste commencent à **0** · l'indentation définit les blocs.
 
+=== EXERCICES ===
+# trous : Complète le programme Python
+~~~
+nom = [[input]]("Ton prénom ? ")
+age = [[int]](input("Ton âge ? "))
+if age >= 18:
+    print("Majeur")
+[[else]]:
+    print("Mineur")
+for i in [[range]](3):
+    print(nom)
+~~~
+
+# calcul : Que vaut la variable x ?
+? `x = 17 % 5`
+= 2
+? `x = 7 // 2`
+= 3
+? `x = 2 ** 5`
+= 32
+? Combien de fois s'exécute `for i in range(3, 10):` ?
+= 7
+
 === CARTES ===
 Q: Quel type renvoie input() ?
 R: Toujours une **chaîne de caractères** (str) : il faut convertir avec int() ou float().

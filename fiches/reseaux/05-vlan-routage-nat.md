@@ -64,6 +64,17 @@ Les adresses privées (192.168.x.x…) ne circulent pas sur Internet. La ==NAT==
 > [!retenir]
 > Switch = table MAC. VLAN = réseaux séparés sur un même switch (access = 1 VLAN, trunk = plusieurs, 802.1Q). Routeur = table de routage, route par défaut 0.0.0.0/0. NAT/PAT = IP privées → une IP publique.
 
+=== EXERCICES ===
+# paires : Associe chaque notion à sa définition
+- VLAN = Réseau local virtuel isolé sur un switch
+- Port access = Port qui appartient à un seul VLAN
+- Port trunk = Port qui transporte plusieurs VLAN étiquetés
+- 802.1Q = Norme d'étiquetage des trames VLAN
+- NAT = Traduction des adresses privées en adresse publique
+
+# trous : Complète les commandes Cisco
+Pour mettre un port dans le VLAN 10 : switchport access vlan [[10]]. Pour qu'un port transporte plusieurs VLAN : switchport mode [[trunk]]. Pour créer une route par défaut : ip route [[0.0.0.0]] 0.0.0.0 10.0.0.1.
+
 === CARTES ===
 Q: Comment un switch remplit-il sa table MAC ?
 R: En lisant l'adresse MAC **source** des trames reçues sur chaque port.

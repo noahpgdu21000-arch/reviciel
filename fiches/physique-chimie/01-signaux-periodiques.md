@@ -59,6 +59,28 @@ L'oscilloscope affiche la tension en fonction du temps sur un écran quadrillé 
 > [!retenir]
 > f = 1/T · U~eff~ = U~max~/√2 · secteur : 230 V, 50 Hz, T = 20 ms, U~max~ ≈ 325 V · le multimètre (AC) mesure la valeur efficace.
 
+=== EXERCICES ===
+# calcul : Signaux périodiques
+? Période de 20 ms : fréquence (en Hz) ?
+= 50 Hz
+! f = 1/T = 1/0,020 = 50 Hz.
+? Fréquence de 1 000 Hz : période (en ms) ?
+= 1 ms
+? U~max~ = 12 V. Valeur efficace (en V) ?
+= 8,49 V ± 0,02
+! 12 / √2 ≈ 8,49 V.
+? Oscilloscope : un motif fait 4 divisions avec une base de temps de 5 ms/div. Période (en ms) ?
+= 20 ms
+? Le sommet est à 3 divisions avec une sensibilité de 2 V/div. U~max~ (en V) ?
+= 6 V
+
+# paires : Associe chaque grandeur à son unité
+- Période = seconde (s)
+- Fréquence = hertz (Hz)
+- Tension = volt (V)
+- Base de temps = ms/div
+- Sensibilité verticale = V/div
+
 === CARTES ===
 Q: Relation entre fréquence et période ?
 R: **f = 1 / T** (f en Hz, T en s).

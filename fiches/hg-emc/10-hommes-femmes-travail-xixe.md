@@ -50,6 +50,30 @@ Les femmes ont **toujours travaillé**, mais leur travail est peu reconnu.
 > [!retenir]
 > Au XIXe siècle, le travail est long, dur, mal payé et sans protection. Les femmes gagnent environ deux fois moins que les hommes et la femme mariée dépend de son mari (Code civil). Les ouvriers s'organisent et obtiennent peu à peu des droits : grève (1864), syndicats (1884), accidents du travail (1898), repos du dimanche (1906).
 
+=== EXERCICES ===
+# trous : Complète avec les mots du cours
+Au XIXe siècle, beaucoup de paysans quittent les campagnes pour travailler en ville : c'est l'[[exode rural]]. Un ouvrier travaille souvent [[12|douze]] à 15 heures par jour. Le [[livret ouvrier]] permet au patron de contrôler ses ouvriers. Le premier métier des femmes est [[domestique|domestiques]]. Une ouvrière gagne environ [[deux fois moins|2 fois moins]] qu'un ouvrier.
+
+# ordre : Remets les conquêtes sociales dans l'ordre chronologique
+- Première loi sur le travail des enfants (1841)
+- Droit de grève (1864)
+- Droit de créer des syndicats (1884)
+- Loi sur les accidents du travail (1898)
+- Repos hebdomadaire obligatoire (1906)
+- Journée de 8 heures (1919)
+! Astuce : la grève (1864) arrive avant les syndicats (1884).
+
+# paires : Associe chaque date à l'événement
+- 1864 = Droit de grève
+- 1884 = Droit syndical (loi Waldeck-Rousseau)
+- 1895 = Création de la CGT
+- 1898 = Indemnisation des accidents du travail
+- 1907 = La femme mariée dispose de son salaire
+
+# classer : Conditions de travail ou conquête sociale ?
+Conditions de travail difficiles : journées de 12 à 15 heures, livret ouvrier, aucune protection en cas d'accident, salaires très bas
+Conquêtes sociales : droit de grève, droit syndical, repos du dimanche, journée de 8 heures
+
 === CARTES ===
 Q: Qu'est-ce que l'exode rural ?
 R: Le départ des habitants des **campagnes vers les villes**, pour travailler notamment dans l'industrie.

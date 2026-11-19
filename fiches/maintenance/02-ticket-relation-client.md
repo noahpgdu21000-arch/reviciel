@@ -61,6 +61,24 @@ Il précise : date et heure, client et lieu, matériel, **symptômes**, **diagno
 > [!astuce] Le mail professionnel
 > Objet précis (« Intervention du 12/03 – imprimante accueil »), formule d'appel, phrases courtes, une idée par paragraphe, formule de politesse, signature avec ses coordonnées. Relire avant d'envoyer !
 
+=== EXERCICES ===
+# classer : Incident, demande de service ou problème ?
+Incident : l'imprimante n'imprime plus, le serveur de fichiers est inaccessible
+Demande de service : créer un compte pour un stagiaire, installer un logiciel
+Problème : le Wi-Fi coupe tous les jours vers 10 h sans qu'on sache pourquoi
+
+# ordre : Remets les statuts d'un ticket dans l'ordre
+- Nouveau
+- En cours
+- En attente
+- Résolu
+- Clos
+
+# paires : Associe chaque niveau de support à son rôle
+- N1 = Helpdesk : accueille, qualifie et règle les cas simples
+- N2 = Technicien de proximité ou spécialiste
+- N3 = Expert, éditeur ou constructeur
+
 === CARTES ===
 Q: À quoi sert un ticket ?
 R: À **enregistrer et suivre** une demande, de sa création à sa clôture.

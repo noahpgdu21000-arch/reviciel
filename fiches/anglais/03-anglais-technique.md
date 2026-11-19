@@ -90,6 +90,18 @@ ordre: 3
 > [!retenir]
 > to troubleshoot = dépanner · issue = problème · actually = en fait · to set up = configurer · settings = paramètres · data breach = fuite de données.
 
+=== EXERCICES ===
+# paires : Associe le mot anglais à sa traduction
+- to troubleshoot = dépanner
+- settings = paramètres
+- power supply = alimentation
+- firewall = pare-feu
+- data breach = fuite de données
+- to unplug = débrancher
+
+# trous : Complète l'appel au support
+Hello, IT support, how can I [[help]] you? — My computer doesn't work. — Have you tried [[restarting|rebooting]] it? — Yes. — Is the cable plugged [[in]]? — Oh no, it isn't! — OK, the [[issue|problem]] is fixed now.
+
 === CARTES ===
 Q: to troubleshoot
 R: **dépanner**, diagnostiquer une panne

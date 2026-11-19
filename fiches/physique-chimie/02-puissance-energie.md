@@ -60,6 +60,21 @@ Elle indique les valeurs ==nominales== de l'appareil : tension (230 V ~), fréqu
 > [!retenir]
 > P = U × I · E = P × t · 1 kWh = 3,6 MJ · η = P~utile~ / P~absorbée~ < 1.
 
+=== EXERCICES ===
+# calcul : Puissance et énergie
+? Un radiateur absorbe 9 A sous 230 V. Puissance (en W) ?
+= 2070 W
+? Une box de 15 W reste allumée 24 h. Énergie consommée (en kWh) ?
+= 0,36 kWh
+! 15 × 24 = 360 Wh = 0,36 kWh.
+? Avec un kWh à 0,25 €, combien coûte cette énergie (en €) ?
+= 0,09 € ± 0,005
+? Une alimentation absorbe 500 W et fournit 425 W. Rendement (en %) ?
+= 85 %
+? 2 kWh en mégajoules (MJ) ?
+= 7,2 MJ
+! 1 kWh = 3,6 MJ.
+
 === CARTES ===
 Q: Formule de la puissance électrique ?
 R: **P = U × I** (W = V × A).

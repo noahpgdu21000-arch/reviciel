@@ -55,6 +55,19 @@ Une ==combustion== est une réaction entre un **combustible** et un **comburant*
 > [!retenir]
 > pH < 7 acide, = 7 neutre, > 7 basique · l'acide dans l'eau · 9 pictogrammes SGH · rouille = fer + dioxygène + eau · triangle du feu = combustible + comburant + énergie.
 
+=== EXERCICES ===
+# classer : Acide, neutre ou basique ?
+Acide : vinaigre (pH 3), jus de citron (pH 2), acide de batterie (pH 1)
+Neutre : eau pure (pH 7)
+Basique : eau de Javel (pH 12), lessive (pH 10)
+
+# paires : Associe chaque pictogramme à son danger
+- Flamme = Inflammable
+- Tête de mort = Toxicité aiguë
+- Main et surface rongées = Corrosif
+- Flamme au-dessus d'un cercle = Comburant
+- Arbre et poisson morts = Dangereux pour l'environnement
+
 === CARTES ===
 Q: Une solution de pH 3 est…
 R: **Acide** (pH < 7).

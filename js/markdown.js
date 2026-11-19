@@ -201,7 +201,7 @@
      + bonne réponse
      ! explication
   */
-  var SECTION_RE = /^\s*={3,}\s*(cartes|flashcards|quiz|qcm)\s*={3,}\s*$/i;
+  var SECTION_RE = /^\s*={3,}\s*(cartes|flashcards|quiz|qcm|exercices|exercises)\s*={3,}\s*$/i;
 
   function parseMeta(block) {
     var meta = {};
@@ -264,17 +264,83 @@
     return { questions: qs, errors: errors };
   }
 
+  /* ---------- Exercices ----------
+     # trous : consigne        texte avec [[réponse]] ou [[réponse|variante]]
+     # ordre : consigne        - éléments dans le bon ordre (affichés mélangés)
+     # paires : consigne       - gauche = droite
+     # classer : consigne      Catégorie : élément, élément
+     # calcul : consigne       ? question   = 8,7 A ± 0,1   ! explication
+     Une ligne « ! … » donne l'explication affichée après la correction. */
+  var EX_TYPES = { trous: 'trous', 'texte a trous': 'trous', ordre: 'ordre', chronologie: 'ordre', 'remettre dans l\'ordre': 'ordre', paires: 'paires', association: 'paires', associer: 'paires', classer: 'classer', classement: 'classer', tri: 'classer', calcul: 'calcul', calculs: 'calcul' };
+  function num(s) { var v = parseFloat(String(s).replace(/\s+/g, '').replace(',', '.')); return isFinite(v) ? v : NaN; }
+  function parseExercises(lines) {
+    var list = [], errors = [], cur = null;
+    function push() {
+      if (!cur) return;
+      var e = cur, L = e.lines, ex = { type: e.type, title: e.title, explain: '' };
+      var bodyL = [];
+      L.forEach(function (l) { var m = l.match(/^\s*!\s?(.*)$/); if (m && e.type !== 'calcul') ex.explain += (ex.explain ? '\n' : '') + m[1]; else bodyL.push(l); });
+      var label = '« ' + short(e.title || e.type) + ' »';
+      if (e.type === 'trous') {
+        ex.text = bodyL.join('\n').trim();
+        ex.blanks = [];
+        ex.text.replace(/\[\[([^\]]+)\]\]/g, function (m, a) { ex.blanks.push(a.split('|').map(function (x) { return x.trim(); })); return m; });
+        if (!ex.blanks.length) { errors.push('Exercice ' + label + ' : aucun trou [[...]]'); cur = null; return; }
+      } else if (e.type === 'ordre') {
+        ex.items = bodyL.map(function (l) { var m = l.match(/^\s*-\s+(.*)$/); return m ? m[1].trim() : null; }).filter(Boolean);
+        if (ex.items.length < 3) { errors.push('Exercice ' + label + ' : il faut au moins 3 lignes « - »'); cur = null; return; }
+      } else if (e.type === 'paires') {
+        ex.pairs = bodyL.map(function (l) { var m = l.match(/^\s*-\s+(.+?)\s+=\s+(.+)$/); return m ? [m[1].trim(), m[2].trim()] : null; }).filter(Boolean);
+        if (ex.pairs.length < 3) { errors.push('Exercice ' + label + ' : il faut au moins 3 lignes « - gauche = droite »'); cur = null; return; }
+      } else if (e.type === 'classer') {
+        ex.cats = bodyL.map(function (l) {
+          var m = l.match(/^\s*([^:]+?)\s*:\s*(.+)$/);
+          if (!m) return null;
+          var sep = m[2].indexOf(';') !== -1 ? ';' : ',';
+          return { name: m[1].replace(/^-\s*/, '').trim(), items: m[2].split(sep).map(function (x) { return x.trim(); }).filter(Boolean) };
+        }).filter(Boolean);
+        if (ex.cats.length < 2) { errors.push('Exercice ' + label + ' : il faut au moins 2 catégories « Catégorie : a, b »'); cur = null; return; }
+      } else if (e.type === 'calcul') {
+        ex.questions = [];
+        var q = null;
+        L.forEach(function (l) {
+          var m;
+          if ((m = l.match(/^\s*\?\s?(.*)$/))) { q = { q: m[1].trim(), value: NaN, unit: '', tol: null, explain: '' }; ex.questions.push(q); }
+          else if (q && (m = l.match(/^\s*=\s*(.+)$/))) {
+            var parts = m[1].split('±'), a = parts[0].trim().match(/^(-?[\d\s.,]*\d)\s*(.*)$/);
+            if (a) { q.value = num(a[1]); q.unit = a[2].trim(); }
+            if (parts[1]) q.tol = num(parts[1]);
+          } else if (q && (m = l.match(/^\s*!\s?(.*)$/))) q.explain += (q.explain ? '\n' : '') + m[1];
+          else if (q && l.trim() && !q.explain && isNaN(q.value)) q.q += '\n' + l.trim();
+        });
+        ex.questions = ex.questions.filter(function (x) { if (isNaN(x.value)) { errors.push('Calcul « ' + short(x.q) + ' » : ligne « = résultat » manquante'); return false; } if (x.tol == null || isNaN(x.tol)) x.tol = Math.max(Math.abs(x.value) * 0.01, 0.005); return true; });
+        if (!ex.questions.length) { cur = null; return; }
+      }
+      list.push(ex);
+      cur = null;
+    }
+    lines.forEach(function (l) {
+      var m = l.match(/^\s*#\s*([^:#]+?)\s*:\s*(.*)$/);
+      var t = m && EX_TYPES[deaccent(m[1]).toLowerCase().trim()];
+      if (t) { push(); cur = { type: t, title: m[2].trim(), lines: [] }; }
+      else if (cur) cur.lines.push(l);
+    });
+    push();
+    return { exercises: list, errors: errors };
+  }
+
   function parseFiche(src) {
     src = String(src || '').replace(/^﻿/, '').replace(/\r\n?/g, '\n');
     var meta = {}, body = src;
     var fm = src.match(/^---\n([\s\S]*?)\n---[ \t]*(?:\n|$)/);
     if (fm) { meta = parseMeta(fm[1]); body = src.slice(fm[0].length); }
-    var parts = { content: [], cards: [], quiz: [] }, cur = 'content';
+    var parts = { content: [], cards: [], quiz: [], ex: [] }, cur = 'content';
     body.split('\n').forEach(function (l) {
       var m = l.match(SECTION_RE);
-      if (m) { var k = m[1].toLowerCase(); cur = (k === 'quiz' || k === 'qcm') ? 'quiz' : 'cards'; return; }
+      if (m) { var k = m[1].toLowerCase(); cur = (k === 'quiz' || k === 'qcm') ? 'quiz' : /^exerci/.test(k) ? 'ex' : 'cards'; return; }
       parts[cur].push(l);
     });
+    var x = parseExercises(parts.ex);
     var c = parseCards(parts.cards), q = parseQuiz(parts.quiz);
     var tags = meta['mots-cles'] || meta.tags || '';
     return {
@@ -288,7 +354,8 @@
       body: parts.content.join('\n').trim(),
       cards: c.cards,
       quiz: q.questions,
-      errors: c.errors.concat(q.errors),
+      exercises: x.exercises,
+      errors: c.errors.concat(q.errors, x.errors),
       src: src
     };
   }

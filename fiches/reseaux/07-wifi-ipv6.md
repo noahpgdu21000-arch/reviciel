@@ -73,6 +73,16 @@ Les adresses IPv4 (32 bits, environ 4,3 milliards) sont épuisées. L'==IPv6== u
 > [!retenir]
 > Wi-Fi : 2,4 GHz = portée, 5 GHz = débit ; WPA3 recommandé, WEP interdit, WPS désactivé. IPv6 = 128 bits, 8 groupes hexadécimaux, « :: » une seule fois, fe80:: = lien-local, ::1 = boucle locale.
 
+=== EXERCICES ===
+# classer : 2,4 GHz ou 5 GHz ?
+2,4 GHz : meilleure portée ; traverse mieux les murs ; canaux 1, 6 et 11
+5 GHz : débit plus élevé ; moins de perturbations ; portée plus faible
+
+# trous : Abrège les adresses IPv6
+2001:0db8:0000:0000:0000:0000:0000:0001 s'écrit [[2001:db8::1]].
+fe80:0000:0000:0000:0000:0000:0000:0001 s'écrit [[fe80::1]].
+L'adresse de boucle locale IPv6 s'écrit [[::1]].
+
 === CARTES ===
 Q: Avantage de la bande 2,4 GHz ?
 R: Une **meilleure portée** (traverse mieux les murs).

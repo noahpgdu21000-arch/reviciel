@@ -79,6 +79,28 @@ Les valeurs du commerce suivent des séries normalisées, comme la **E12** : 10,
 
 Entraîne-toi : [loi d'Ohm](#/entrainement/ohm) et [code couleur](#/entrainement/resistances).
 
+=== EXERCICES ===
+# calcul : Loi d'Ohm et associations
+? R = 220 Ω et I = 0,05 A. U (en V) ?
+= 11 V
+? U = 12 V et R = 1 000 Ω. I (en mA) ?
+= 12 mA
+? 100 Ω et 220 Ω en série : R~éq~ (en Ω) ?
+= 320 Ω
+? Deux résistances de 1 kΩ en parallèle : R~éq~ (en Ω) ?
+= 500 Ω
+? Pont diviseur : U~e~ = 9 V, R~1~ = 2 kΩ, R~2~ = 1 kΩ. U~s~ (en V) ?
+= 3 V
+! 9 × 1 / (2 + 1) = 3 V.
+
+# paires : Code couleur : associe chaque couleur à son chiffre
+- Noir = 0
+- Marron = 1
+- Rouge = 2
+- Orange = 3
+- Jaune = 4
+- Violet = 7
+
 === CARTES ===
 Q: Énoncé de la loi d'Ohm ?
 R: **U = R × I** (tension = résistance × intensité).

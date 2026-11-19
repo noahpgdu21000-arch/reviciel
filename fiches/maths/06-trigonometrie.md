@@ -66,6 +66,25 @@ Une tension alternative sinusoïdale s'écrit u(t) = U~max~ × sin(ωt), avec ==
 > [!retenir]
 > SOH CAH TOA · π rad = 180° · sur le cercle trigonométrique, cos = abscisse et sin = ordonnée · cos² + sin² = 1.
 
+=== EXERCICES ===
+# calcul : Trigonométrie
+? 60° = π/n radians : quelle est la valeur de n ?
+= 3
+? Convertis π/4 radian en degrés.
+= 45 °
+? Triangle rectangle : hypoténuse 10 cm, côté opposé 5 cm. Que vaut sin x ?
+= 0,5
+? Tension de 50 Hz : pulsation ω = 2πf (en rad/s, arrondie à l'unité) ?
+= 314 ± 1
+! 2 × 3,14159 × 50 ≈ 314 rad/s.
+
+# paires : Associe chaque valeur remarquable
+- cos 0 = 1
+- sin(π/6) = 1/2
+- cos(π/4) = √2/2
+- sin(π/3) = √3/2
+- cos(π/2) = 0
+
 === CARTES ===
 Q: Définition du cosinus dans un triangle rectangle ?
 R: cos x = côté **adjacent** / **hypoténuse**.

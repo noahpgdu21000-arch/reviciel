@@ -46,6 +46,27 @@ L'==industrialisation== (ou révolution industrielle) est le passage d'une écon
 > [!retenir]
 > L'industrialisation française démarre vers 1830-1840 avec la **vapeur, le charbon, le textile et le chemin de fer**, puis se poursuit à la fin du XIXe siècle avec l'**électricité, le pétrole et l'automobile**. Elle crée la classe ouvrière et pose la « question sociale ».
 
+=== EXERCICES ===
+# trous : Complète le texte
+L'industrialisation commence en [[Angleterre]] à la fin du XVIIIe siècle. En France, elle démarre vers les années [[1830]]. L'énergie principale est le [[charbon]], qui fait fonctionner la [[machine à vapeur]]. La première ligne de chemin de fer de voyageurs relie Paris à [[Saint-Germain|Saint-Germain-en-Laye]] en 1837.
+
+# classer : Première ou seconde industrialisation ?
+Première industrialisation (vers 1830-1880) : machine à vapeur, charbon, textile, chemin de fer
+Seconde industrialisation (fin XIXe - début XXe) : électricité, pétrole, automobile, travail à la chaîne
+
+# ordre : Remets dans l'ordre chronologique
+- Début de la révolution industrielle en Angleterre (fin XVIIIe siècle)
+- Première ligne de chemin de fer de voyageurs en France (1837)
+- Ouverture du Bon Marché à Paris (1852)
+- Exposition universelle et tour Eiffel (1889)
+- Travail à la chaîne chez Ford (1913)
+
+# paires : Associe chaque mot à sa définition
+- Exode rural = Départ des campagnes vers les villes
+- Capitalisme = Des propriétaires investissent et emploient des salariés
+- Taylorisme = Découper le travail en gestes simples et chronométrés
+- Question sociale = Problèmes de misère ouvrière créés par l'industrialisation
+
 === CARTES ===
 Q: Qu'est-ce que l'industrialisation ?
 R: Le passage d'une économie **agricole et artisanale** à une économie **industrielle** (production en masse, usines, machines).

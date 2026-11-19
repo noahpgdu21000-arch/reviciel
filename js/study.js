@@ -237,6 +237,12 @@
   App.route(/^\/entrainement$/, (v) => {
     App.setTitle('Exercices');
     v.innerHTML = '<div class="page-head"><h1>Exercices interactifs</h1><p>Des exercices générés à l\'infini, corrigés pas à pas. Parfait avant un contrôle ou une épreuve pratique.</p></div>' +
+      '<div class="section-head"><h2>Exercices par matière</h2></div><div class="grid" style="margin-bottom:22px">' +
+      RC.SUBJECTS.filter((s) => RC.subjectFiches(s.id).some((f) => f.exercises.length)).map((s) => {
+        const n = RC.subjectFiches(s.id).reduce((a, f) => a + f.exercises.length, 0);
+        return '<a class="subject-card" style="--c:' + s.color + '" href="#/matiere/' + s.id + '/exercices">' + App.sIcon(s) + '<h3>' + E(s.name) + '</h3><div class="meta"><span>' + plural(n, 'exercice') + '</span></div></a>';
+      }).join('') + '</div>' +
+      '<div class="section-head"><h2>Entraînements infinis et labo</h2></div>' +
       '<a class="card tool-card lab-promo" style="--c:#0284c7;margin-bottom:14px" href="#/labo"><span class="s-icon">' + icon('network') + '</span><div style="flex:1"><h3>Labo réseau Cisco (simulateur)</h3><p>13 labs avec cours : VLAN, trunk, routage, DHCP, SSH, ACL, dépannage…</p></div>' + icon('right', 'chev') + '</a>' +
       '<div class="grid wide">' +
       window.TRAINERS.map((t) => {
@@ -246,7 +252,7 @@
       }).join('') + '</div>';
   });
 
-  const INPUTMODE = { ipv4: 'text', conversions: 'text', ohm: 'decimal', resistances: 'text', pourcentages: 'decimal' };
+  const INPUTMODE = { ipv4: 'text', conversions: 'text', ohm: 'decimal', resistances: 'text', pourcentages: 'decimal', verbes: 'text', electricite: 'decimal', algebre: 'text', salaire: 'decimal' };
   App.route(/^\/entrainement\/([\w-]+)$/, (v, [tid]) => {
     const t = window.TRAINERS.find((x) => x.id === tid);
     if (!t) return App.notFound(v, 'Exercice introuvable');

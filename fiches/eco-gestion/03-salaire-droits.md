@@ -61,6 +61,20 @@ Du plus général au plus particulier :
 > [!retenir]
 > Brut − cotisations salariales = net. Brut + cotisations patronales = coût employeur. Litige individuel → **prud'hommes**. Représentants élus → **CSE** (dès 11 salariés).
 
+=== EXERCICES ===
+# calcul : Du brut au net
+? Salaire brut 1 900 €, cotisations salariales 22 %. Salaire net (en €) ?
+= 1482 €
+! 1 900 × 0,78 = 1 482 €.
+? Net avant impôt 1 482 €, prélèvement à la source 30 €. Net à payer (en €) ?
+= 1452 €
+
+# paires : Qui contacter ?
+- Litige avec son employeur sur son salaire = Conseil de prud'hommes
+- Faire contrôler le respect du Code du travail = Inspection du travail
+- Représentants élus du personnel = CSE
+- Visite d'aptitude au poste = Médecine du travail
+
 === CARTES ===
 Q: Différence entre salaire brut et salaire net ?
 R: Le **net** = le brut moins les **cotisations sociales salariales**.

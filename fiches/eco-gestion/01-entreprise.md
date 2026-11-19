@@ -68,6 +68,25 @@ L'==organigramme== représente la structure de l'entreprise : les services (fonc
 > [!retenir]
 > Une entreprise se classe par **taille**, **secteur** et **statut juridique**. Elle vise des finalités **économiques**, **sociales** et **sociétales** et évolue dans un environnement de **parties prenantes**.
 
+=== EXERCICES ===
+# classer : Classe chaque entreprise selon sa taille
+Microentreprise (moins de 10 salariés) : un plombier avec 2 apprentis, une boutique de réparation de téléphones de 4 salariés
+PME (moins de 250 salariés) : une entreprise de maintenance informatique de 35 salariés, une usine de 180 salariés
+Grande entreprise (5 000 salariés et plus) : un opérateur télécom de 50 000 salariés
+
+# calcul : Valeur ajoutée
+? Chiffre d'affaires 800 000 €, consommations intermédiaires 350 000 €. Valeur ajoutée (en €) ?
+= 450000 €
+! VA = CA − consommations intermédiaires.
+
+# paires : Que signifie chaque lettre de PESTEL ?
+- P = Politique
+- Le premier E = Économique
+- S = Socioculturel
+- T = Technologique
+- Le second E = Écologique
+- L = Légal
+
 === CARTES ===
 Q: Qu'est-ce qu'une entreprise ?
 R: Une organisation qui **produit des biens ou des services** pour les **vendre** sur un marché.

@@ -56,6 +56,18 @@ Le ==pare-feu== filtre le trafic entre deux zones (par exemple le LAN et Interne
 > [!retenir] La défense en profondeur
 > Aucune protection n'est parfaite : on **empile plusieurs couches** (pare-feu, segmentation, mises à jour, MFA, sauvegardes, supervision, sensibilisation des utilisateurs) pour qu'une faille isolée ne suffise pas.
 
+=== EXERCICES ===
+# paires : Associe chaque élément à son rôle
+- Pare-feu = Filtrer le trafic selon des règles
+- DMZ = Zone isolée pour les serveurs accessibles depuis Internet
+- VPN = Tunnel chiffré à travers Internet
+- IDS = Détecter les intrusions
+- SIEM = Centraliser et corréler les journaux
+
+# classer : Bonne pratique d'administration ou à éviter ?
+Bonne pratique : SSH, comptes nominatifs, mots de passe par défaut changés, firmware à jour
+À éviter : Telnet, compte admin/admin, ports de switch inutilisés activés, services inutiles activés
+
 === CARTES ===
 Q: Rôle d'un pare-feu ?
 R: **Filtrer le trafic** entre des zones selon des règles (IP, port, protocole, sens).

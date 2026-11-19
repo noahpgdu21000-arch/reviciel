@@ -105,7 +105,8 @@
       html += '<div class="card" style="--c:' + s.color + '">' + bar(st.score, s.color) +
         '<div class="row between small" style="margin:8px 0 14px"><span>' + st.read + '/' + st.count + ' fiches lues · ' + st.mastered + '/' + st.cards + ' cartes maîtrisées</span><b>' + pct(st.score) + ' maîtrisé</b></div><div class="row">' +
         (nCards ? '<a class="btn" href="#/matiere/' + sid + '/cartes">' + icon('cards') + ' Réviser les cartes</a>' : '') +
-        (nQ ? '<a class="btn secondary" href="#/matiere/' + sid + '/quiz">' + icon('quiz') + ' Quiz de la matière</a>' : '') + '</div></div>';
+        (nQ ? '<a class="btn secondary" href="#/matiere/' + sid + '/quiz">' + icon('quiz') + ' Quiz de la matière</a>' : '') +
+        (list.some((f) => f.exercises.length) ? '<a class="btn secondary" href="#/matiere/' + sid + '/exercices">' + icon('pen') + ' Exercices</a>' : '') + '</div></div>';
       html += '<div class="fiche-list section">' + list.map((f, i) => ficheRow(f, i + 1)).join('') + '</div>';
     } else {
       html += '<div class="card empty">' + icon('pen') + '<p>Aucune fiche ici pour l\'instant.</p><a class="btn" href="#/editeur">' + icon('plus') + ' Créer une fiche</a></div>';
@@ -165,6 +166,7 @@
       '<div class="fiche-actions">' +
       (f.cards.length ? '<a class="btn" href="#/fiche/' + enc + '/cartes">' + icon('cards') + ' Cartes mémoire</a>' : '') +
       (f.quiz.length ? '<a class="btn secondary" href="#/fiche/' + enc + '/quiz">' + icon('quiz') + ' Quiz</a>' : '') +
+      (f.exercises.length ? '<a class="btn secondary" href="#/fiche/' + enc + '/exercices">' + icon('pen') + ' Exercices (' + f.exercises.length + ')</a>' : '') +
       '<button class="btn ghost' + (fav ? ' on' : '') + '" data-act="fav" aria-pressed="' + fav + '">' + icon('star') + ' <span>' + (fav ? 'Favori' : 'Favori ?') + '</span></button>' +
       '<button class="btn ghost" data-act="hide" aria-pressed="false" title="Cache les mots surlignés : touche-les pour vérifier">' + icon('eyeoff') + ' Mode caché</button>' +
       ('speechSynthesis' in window ? '<button class="btn ghost" data-act="speak">' + icon('volume') + ' Écouter</button>' : '') +
@@ -175,7 +177,8 @@
       '<div class="md" id="fiche-body">' + (r.html || '<p class="muted">Cette fiche n\'a pas encore de contenu.</p>') + '</div>' +
       '<div class="fiche-end"><div class="row">' +
       '<button class="btn lg ' + (st.read ? 'success' : 'soft') + '" data-act="read">' + icon('check') + ' ' + (st.read ? 'Fiche lue' : 'J\'ai lu et compris cette fiche') + '</button>' +
-      (f.cards.length ? '<a class="btn lg secondary" href="#/fiche/' + enc + '/cartes">' + icon('cards') + ' Tester avec les cartes</a>' : '') + '</div>' +
+      (f.cards.length ? '<a class="btn lg secondary" href="#/fiche/' + enc + '/cartes">' + icon('cards') + ' Tester avec les cartes</a>' : '') +
+      (f.exercises.length ? '<a class="btn lg secondary" href="#/fiche/' + enc + '/exercices">' + icon('pen') + ' Faire les exercices</a>' : '') + '</div>' +
       '<div class="pager">' + (prev ? '<a class="prev" href="#/fiche/' + encodeURIComponent(prev.id) + '"><span>‹ Précédente</span>' + E(prev.title) + '</a>' : '') +
       (next ? '<a class="next" href="#/fiche/' + encodeURIComponent(next.id) + '"><span>Suivante ›</span>' + E(next.title) + '</a>' : '') + '</div></div>' +
       '</article>' + (hasToc ? '<aside class="toc"><h4>Sommaire</h4>' + tocLinks + '</aside>' : '') + '</div>';

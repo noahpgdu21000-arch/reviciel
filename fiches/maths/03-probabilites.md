@@ -56,6 +56,28 @@ Si on répète une expérience un **grand nombre de fois**, la ==fréquence== d'
 > [!retenir]
 > 0 ≤ P(A) ≤ 1 · P(Ā) = 1 − P(A) · P(A ∪ B) = P(A) + P(B) − P(A ∩ B) · fréquence → probabilité quand le nombre d'essais augmente.
 
+=== EXERCICES ===
+# calcul : Calcule les probabilités (réponds avec un nombre décimal)
+? Dé équilibré à 6 faces : probabilité d'obtenir un nombre pair ?
+= 0,5
+! 3 issues favorables sur 6.
+? Si P(A) = 0,35, que vaut P(Ā) ?
+= 0,65
+! P(Ā) = 1 − 0,35.
+? P(A) = 0,5 ; P(B) = 0,4 ; P(A ∩ B) = 0,2. Que vaut P(A ∪ B) ?
+= 0,7
+! 0,5 + 0,4 − 0,2 = 0,7.
+? On tire une carte dans un jeu de 32. Probabilité de tirer un cœur ?
+= 0,25
+! 8 cœurs sur 32 cartes.
+
+# paires : Associe chaque notation ou mot à son sens
+- A ∩ B = A et B
+- A ∪ B = A ou B
+- Ā = Le contraire de A
+- Probabilité égale à 1 = Événement certain
+- Probabilité égale à 0 = Événement impossible
+
 === CARTES ===
 Q: Entre quelles valeurs est comprise une probabilité ?
 R: Entre **0** (impossible) et **1** (certain).

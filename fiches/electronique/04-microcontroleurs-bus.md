@@ -74,6 +74,26 @@ void loop() {              // exécuté EN BOUCLE, à l'infini
 > [!retenir]
 > Microcontrôleur = tout sur une puce, tâche dédiée. Arduino : `setup()` une fois, `loop()` en boucle. UART = TX/RX, I2C = SDA/SCL + adresses, SPI = MOSI/MISO/SCK/CS. ESP32 = 3,3 V !
 
+=== EXERCICES ===
+# paires : Associe chaque bus à ses fils
+- UART = TX et RX
+- I2C = SDA et SCL
+- SPI = MOSI, MISO, SCK et CS
+- 1-Wire = Un seul fil de données
+
+# trous : Complète le programme Arduino (LED qui clignote)
+~~~
+void [[setup]]() {
+  pinMode(13, [[OUTPUT]]);
+}
+void [[loop]]() {
+  digitalWrite(13, [[HIGH]]);
+  delay(500);
+  digitalWrite(13, LOW);
+  delay(500);
+}
+~~~
+
 === CARTES ===
 Q: Qu'est-ce qu'un microcontrôleur ?
 R: Un circuit qui regroupe **processeur, mémoire et entrées/sorties** sur une seule puce, pour une tâche dédiée.
