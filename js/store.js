@@ -14,7 +14,7 @@
 
   function defaults() {
     return {
-      read: {}, fav: {}, quiz: {}, cards: {}, trainers: {}, labs: {}, activity: {}, quizLog: [],
+      read: {}, fav: {}, quiz: {}, cards: {}, trainers: {}, labs: {}, activity: {}, quizLog: [], plans: [],
       last: null, streak: { last: null, count: 0 },
       settings: { theme: 'auto', fontSize: 'm', newPerDay: 20 }
     };
@@ -32,6 +32,7 @@
     s = Object.assign(d, s && typeof s === 'object' ? s : {});
     ['read', 'fav', 'quiz', 'cards', 'trainers', 'labs', 'activity'].forEach((k) => { if (!s[k] || typeof s[k] !== 'object') s[k] = {}; });
     if (!Array.isArray(s.quizLog)) s.quizLog = [];
+    if (!Array.isArray(s.plans)) s.plans = [];
     if (!s.streak || typeof s.streak !== 'object') s.streak = { last: null, count: 0 };
     s.settings = Object.assign(defaults().settings, s.settings || {});
     return s;
@@ -105,15 +106,37 @@
   function setSetting(k, v) { state.settings[k] = v; save(); }
   function setLab(id, data) { state.labs[id] = { goals: (data.goals || []).slice(), done: !!data.done }; bump(); save(); }
 
+  /* ---------- Planning des contrôles ---------- */
+  function addPlan(p) { state.plans.push(p); save(); return p; }
+  function removePlan(id) { state.plans = state.plans.filter((p) => p.id !== id); state.plansDel = state.plansDel || {}; state.plansDel[id] = today(); save(); }
+  function togglePlanTask(id, key) {
+    const p = state.plans.find((x) => x.id === id);
+    if (!p) return;
+    p.done = p.done || {};
+    if (p.done[key]) delete p.done[key]; else { p.done[key] = today(); bump(); }
+    save();
+  }
+
   /* ---------- Fiches perso ---------- */
-  function saveUserFiches() { return write(UKEY, userFiches); }
+  function saveUserFiches() { const ok = write(UKEY, userFiches); listeners.forEach((fn) => { try { fn(); } catch (e) {} }); return ok; }
+  // fiches supprimées (pour que la synchronisation ne les fasse pas revenir)
+  const TKEY = 'reviciel.mesfiches.supprimees';
+  let deleted = load(TKEY, {});
+  if (!deleted || typeof deleted !== 'object') deleted = {};
   function upsertUserFiche(id, src) {
     const now = Date.now();
     const f = userFiches.find((x) => x.id === id);
     if (f) { f.src = src; f.updated = now; } else userFiches.push({ id, src, created: now, updated: now });
     return saveUserFiches();
   }
-  function deleteUserFiche(id) { userFiches = userFiches.filter((x) => x.id !== id); saveUserFiches(); }
+  function deleteUserFiche(id) { userFiches = userFiches.filter((x) => x.id !== id); deleted[id] = Date.now(); write(TKEY, deleted); saveUserFiches(); }
+  /* remplace tout d'un coup (après une synchronisation avec le compte en ligne) */
+  function setAll(progress, fiches, dels) {
+    if (progress) state = normalize(progress);
+    if (dels && typeof dels === 'object') { deleted = dels; write(TKEY, deleted); }
+    if (Array.isArray(fiches)) { userFiches = fiches; write(UKEY, userFiches); }
+    write(KEY, state);
+  }
 
   /* ---------- Brouillon de l'éditeur ---------- */
   const getDraft = () => load(DKEY, null);
@@ -146,13 +169,14 @@
 
   const api = {
     INTERVALS, today, addDays, save, streak, grade, cardInfo, isNew, isDue, isMastered, newSeenToday,
-    setRead, toggleFav, setLast, saveQuiz, trainerResult, setSetting, setLab,
-    upsertUserFiche, deleteUserFiche, getDraft, setDraft, clearDraft,
+    setRead, toggleFav, setLast, saveQuiz, trainerResult, setSetting, setLab, addPlan, removePlan, togglePlanTask,
+    upsertUserFiche, deleteUserFiche, setAll, getDraft, setDraft, clearDraft,
     exportAll, importAll, resetProgress,
     subscribe: (fn) => { listeners.add(fn); return () => listeners.delete(fn); },
     onError: null
   };
   Object.defineProperty(api, 'state', { get: () => state });
   Object.defineProperty(api, 'userFiches', { get: () => userFiches });
+  Object.defineProperty(api, 'deletedFiches', { get: () => deleted });
   global.Store = api;
 })(window);

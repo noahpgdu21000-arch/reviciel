@@ -212,7 +212,9 @@
         return list.length ? '<div><div class="row between" style="margin-bottom:8px"><b>' + E(g.name) + '</b><button class="btn ghost sm" data-all="' + g.id + '">Tout / rien</button></div><div class="row">' + list.map(chip).join('') + '</div></div>' : '';
       }).join('') +
       '<div><b>Nombre de questions</b><div class="seg" id="count" style="margin-top:8px">' + [10, 20, 30, 50].map((n) => '<button data-n="' + n + '" class="' + (n === count ? 'active' : '') + '">' + n + '</button>').join('') + '</div></div>' +
-      '<div><button class="btn lg" id="go">' + icon('quiz') + ' Lancer le quiz</button> <span class="small muted" id="avail"></span></div></div>';
+      '<div><button class="btn lg" id="go">' + icon('quiz') + ' Lancer le quiz</button> <span class="small muted" id="avail"></span></div></div>' +
+      '<div class="grid wide section"><a class="card tool-card" style="--c:#dc2626" href="#/controle"><span class="s-icon">' + icon('clock') + '</span><div><h3>Mode contrôle</h3><p>Chronométré, sans correction pendant l’épreuve, noté sur 20 avec le corrigé.</p></div></a>' +
+      '<a class="card tool-card" style="--c:#0d9488" href="#/planning"><span class="s-icon">' + icon('calendar') + '</span><div><h3>Planning avant un contrôle</h3><p>Donne la date et les chapitres : l’appli te dit quoi réviser chaque jour.</p></div></a></div>';
     const selected = () => $$('input[type=checkbox]', v).filter((c) => c.checked).map((c) => c.value);
     const pool = () => { const sel = selected(); return RC.questions.filter((q) => sel.indexOf(q.fiche.subject) !== -1); };
     const upd = () => { $('#avail', v).textContent = plural(pool().length, 'question disponible', 'questions disponibles'); };

@@ -37,6 +37,11 @@ Le masque fait aussi 32 bits : des **1 pour la partie réseau**, puis des **0 po
 
 On retire 2 adresses : celle du **réseau** et celle de **broadcast**. Un octet de masque ne peut valoir que 0, 128, 192, 224, 240, 248, 252, 254 ou 255.
 
+~~~schema
+ipv4
+Avec /24, les 3 premiers octets désignent le réseau, le dernier désigne la machine.
+~~~
+
 ## Réseau, broadcast et plage d'hôtes
 
 - ==Adresse réseau== : tous les bits hôte à 0. C'est le « nom » du réseau, on ne la donne à aucune machine. On l'obtient par un ==ET logique== entre l'IP et le masque.

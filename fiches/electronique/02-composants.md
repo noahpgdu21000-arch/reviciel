@@ -33,6 +33,11 @@ ordre: 2
 > **R = (U~alim~ − U~LED~) / I~LED~**
 > Exemple : LED rouge (2 V, 15 mA) sur 5 V → R = (5 − 2) / 0,015 = 200 Ω → on prend la valeur normalisée au-dessus : **220 Ω**.
 
+~~~schema
+led-resistance
+La LED se branche dans le sens passant, toujours avec une résistance en série pour limiter le courant.
+~~~
+
 ## Les transistors : des interrupteurs commandés
 
 | Transistor | Broches | Commande |

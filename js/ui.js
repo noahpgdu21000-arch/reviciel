@@ -61,11 +61,15 @@
     { href: '#/', label: 'Accueil', icon: 'home', re: /^\/$/, tab: true },
     { href: '#/reviser', label: 'Réviser', icon: 'cards', re: /^\/reviser/, tab: true, badge: true },
     { href: '#/quiz', label: 'Quiz', icon: 'quiz', re: /^\/quiz/, tab: true },
-    { href: '#/entrainement', label: 'Exercices', icon: 'target', re: /^\/entrainement/, tab: true },
+    { href: '#/entrainement', label: 'Exercices', short: 'Exos', icon: 'target', re: /^\/entrainement/, tab: true },
     { href: '#/labo', label: 'Labo réseau', short: 'Labo', icon: 'network', re: /^\/labo/, tab: true },
+    { href: '#/partage', label: 'Fiches partagées', short: 'Partage', icon: 'share', re: /^\/partage/, tab: true },
+    { href: '#/controle', label: 'Mode contrôle', icon: 'clock', re: /^\/controle/ },
+    { href: '#/planning', label: 'Planning', icon: 'calendar', re: /^\/planning/ },
     { href: '#/mes-fiches', label: 'Mes fiches', icon: 'pen', re: /^\/(mes-fiches|editeur)/ },
     { href: '#/favoris', label: 'Favoris', icon: 'star', re: /^\/favoris/ },
     { href: '#/progression', label: 'Progression', icon: 'chart', re: /^\/progression/ },
+    { href: '#/compte', label: 'Mon compte', icon: 'user', re: /^\/compte/ },
     { href: '#/parametres', label: 'Paramètres', icon: 'settings', re: /^\/parametres/ }
   ];
   function renderNav() {
@@ -112,7 +116,10 @@
     if (cleanup) { try { cleanup(); } catch (e) { console.error(e); } }
     cleanup = null; keyHandler = null;
     if (global.speechSynthesis) { try { speechSynthesis.cancel(); } catch (e) {} }
-    const v = document.getElementById('view');
+    // nouvelle zone d'affichage à chaque page : les écouteurs de la page précédente disparaissent avec elle
+    const old = document.getElementById('view');
+    const v = old.cloneNode(false);
+    old.replaceWith(v);
     v.classList.remove('fade-in'); void v.offsetWidth; v.classList.add('fade-in');
     for (const r of routes) {
       const m = path.match(r.re);

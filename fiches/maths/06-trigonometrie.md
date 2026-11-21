@@ -46,6 +46,11 @@ Conséquences :
 - ==cos² x + sin² x = 1== ;
 - cos(−x) = cos x et sin(−x) = −sin x.
 
+~~~schema
+cercle-trigo
+Le point M du cercle de rayon 1 a pour coordonnées (cos θ ; sin θ).
+~~~
+
 ## Valeurs remarquables
 
 | x | 0 | π/6 | π/4 | π/3 | π/2 |

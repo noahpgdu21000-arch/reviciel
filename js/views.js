@@ -50,7 +50,13 @@
         '<div class="stat"><b>' + mastered + '/' + RC.cards.length + '</b><span>cartes maîtrisées</span></div></div>' +
         '<div class="row"><a class="btn lg" href="#/reviser">' + icon('cards') + ' Révision du jour' + (todo ? ' (' + todo + ')' : '') + '</a>' +
         '<a class="btn lg glass" href="#/quiz">' + icon('quiz') + ' Quiz mélangé</a></div></section>';
+      if (/github\.io$/.test(location.hostname)) {
+        html += '<div class="card moved-banner section"><span class="s-icon">' + icon('globe') + '</span><div style="flex:1"><b>RéviCIEL déménage : <a href="https://reviciel.web.app/">reviciel.web.app</a></b>' +
+          '<ol class="small"><li>Ici, crée ton compte dans <a href="#/compte">Mon compte</a> : ta progression et tes fiches sont sauvegardées en ligne.</li>' +
+          '<li>Ouvre <b>reviciel.web.app</b> et connecte-toi avec le même compte : tout revient.</li><li>Réinstalle l’appli depuis le nouveau lien (et supprime l’ancienne icône).</li></ol></div></div>';
+      }
       html += '<div id="install-slot">' + installSlot() + '</div>';
+      if (App.planHomeCard) html += App.planHomeCard();
       if (last) {
         const s = RC.SUBJ[last.subject];
         html += '<a class="card resume-card section" style="--c:' + s.color + ';display:flex;color:inherit;text-decoration:none" href="#/fiche/' + encodeURIComponent(last.id) + '">' + sIcon(s) +
@@ -67,7 +73,7 @@
       });
       const labsDone = (window.LABS || []).filter((l) => (st.labs[l.id] || {}).done).length;
       html += '<section class="section"><a class="card tool-card lab-promo" style="--c:#0284c7" href="#/labo"><span class="s-icon">' + icon('network') + '</span><div style="flex:1"><h3>Labo réseau : switchs et routeurs Cisco</h3>' +
-        '<p>Configure de vrais réseaux avec les commandes Cisco IOS, comme dans Packet Tracer : 13 labs avec cours, du niveau débutant au niveau difficile.</p>' +
+        '<p>Pose et câble des routeurs, des switchs et des PC, configure-les en Cisco IOS comme dans Packet Tracer : ' + (window.LABS || []).length + ' labs avec cours, ' + (window.DEFIS || []).length + ' défis et un mode libre.</p>' +
         '<div class="row" style="margin-top:8px"><span class="badge ok">' + labsDone + ' / ' + (window.LABS || []).length + ' labs réussis</span></div></div>' + icon('right', 'chev') + '</a></section>';
       html += '<section class="section"><div class="section-head"><h2>Exercices interactifs</h2><a href="#/entrainement" class="small">Tout voir</a></div><div class="grid wide">' +
         window.TRAINERS.map((t) => '<a class="card tool-card" style="--c:' + t.color + '" href="#/entrainement/' + t.id + '"><span class="s-icon">' + icon(t.icon) + '</span><div><h3>' + E(t.title) + '</h3><p>' + E(t.desc) + '</p></div></a>').join('') +

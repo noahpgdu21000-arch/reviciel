@@ -39,6 +39,11 @@ Un ==réseau informatique== est un ensemble d'équipements reliés entre eux pou
 | Box Internet | routeur + switch + point d'accès Wi-Fi + modem + pare-feu | — |
 | Pare-feu (firewall) | filtre le trafic selon des règles | 3-4 (et plus) |
 
+~~~schema
+reseau-lan
+Un réseau local typique : le switch relie les appareils, la box (routeur) relie le réseau local à Internet.
+~~~
+
 ## L'adresse MAC
 
 L'==adresse MAC== (adresse physique) identifie une carte réseau. Elle fait **48 bits** (6 octets), écrite en hexadécimal : `00:1A:2B:3C:4D:5E`. Les 3 premiers octets identifient le **fabricant** (OUI).

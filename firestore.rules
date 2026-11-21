@@ -1,0 +1,58 @@
+rules_version = '2';
+// Règles d'accès de RéviCIEL : chaque élève ne voit que ses propres données ;
+// les fiches partagées sont lisibles par les élèves connectés.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function isAdmin() { return signedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid)); }
+    function str(v, max) { return v is string && v.size() <= max; }
+
+    // Progression, fiches perso et réseaux du labo : seulement le propriétaire
+    match /users/{uid}/donnees/{doc} {
+      allow read, delete: if signedIn() && request.auth.uid == uid;
+      allow write: if signedIn() && request.auth.uid == uid
+        && doc in ['progression', 'fiches', 'atelier']
+        && request.resource.data.keys().hasOnly(['json', 'maj'])
+        && str(request.resource.data.json, 950000);
+    }
+
+    // Fiches partagées
+    match /partages/{id} {
+      function validShare(d) {
+        return str(d.titre, 120) && d.titre.size() > 0
+          && str(d.matiere, 40) && str(d.resume, 300) && str(d.src, 60000)
+          && str(d.pseudo, 24) && str(d.fiche, 80) && d.imports is int;
+      }
+      allow read: if signedIn();
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['titre', 'matiere', 'resume', 'src', 'pseudo', 'fiche', 'uid', 'cree', 'maj', 'imports'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.imports == 0
+        && validShare(request.resource.data);
+      allow update: if signedIn() && (
+          // l'auteur modifie sa fiche (sans toucher à l'auteur, la date de création ni le compteur)
+          (resource.data.uid == request.auth.uid
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['titre', 'matiere', 'resume', 'src', 'pseudo', 'fiche', 'maj'])
+            && validShare(request.resource.data))
+          // n'importe quel élève connecté : +1 au compteur d'ajouts, rien d'autre
+          || (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['imports'])
+            && request.resource.data.imports == resource.data.imports + 1)
+        );
+      allow delete: if signedIn() && (resource.data.uid == request.auth.uid || isAdmin());
+    }
+
+    // Signalements : tout élève connecté peut signaler, seul l'administrateur les lit
+    match /signalements/{id} {
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['partage', 'motif', 'uid', 'cree'])
+        && request.resource.data.uid == request.auth.uid
+        && str(request.resource.data.partage, 40) && str(request.resource.data.motif, 300);
+      allow read, delete: if isAdmin();
+    }
+
+    // Liste des administrateurs : gérée depuis la console Firebase uniquement
+    match /admins/{uid} {
+      allow read: if signedIn() && request.auth.uid == uid;
+    }
+  }
+}

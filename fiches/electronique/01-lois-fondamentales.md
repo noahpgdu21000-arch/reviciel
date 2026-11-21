@@ -26,6 +26,11 @@ ordre: 1
 - ==Loi des mailles== : dans une boucle fermée, la somme des tensions est nulle. Pour des dipôles **en série** : U = U~1~ + U~2~ + …
 - ==Puissance== : P = U × I = R × I² = U² / R. Une résistance doit supporter la puissance qu'elle dissipe (souvent 1/4 W).
 
+~~~schema
+circuit-ohm
+L'ampèremètre se branche **en série**, le voltmètre **en dérivation** (aux bornes du composant).
+~~~
+
 ## Associer des résistances
 
 | En série | En parallèle (dérivation) |
@@ -35,6 +40,11 @@ ordre: 1
 | R~éq~ plus grande que chaque résistance | R~éq~ plus petite que la plus petite |
 
 Pour **deux** résistances en parallèle : **R~éq~ = (R~1~ × R~2~) / (R~1~ + R~2~)**. Deux résistances identiques R en parallèle → R/2.
+
+~~~schema
+serie-parallele
+En série les résistances s'ajoutent ; en parallèle la résistance équivalente est plus petite que la plus petite.
+~~~
 
 ## Le pont diviseur de tension
 

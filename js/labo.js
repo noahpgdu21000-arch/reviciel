@@ -161,8 +161,13 @@
     if (!list.length) cur = newProject('Mon premier réseau', exampleSim());
     if (!cur || !list.find((p) => p.id === cur)) cur = list[0].id;
 
+    const defiDone = (d) => !!(Store.state.labs['defi:' + d.id] || {}).done;
     v.innerHTML = '<div class="crumbs"><a href="#/">Accueil</a><span>›</span><a href="#/labo">Labo réseau</a><span>›</span><span>Mode libre</span></div>' +
       '<div class="page-head"><h1>Mode libre</h1><p>Construis ton réseau comme dans Packet Tracer. Tout est enregistré automatiquement sur cet appareil.</p></div>' +
+      '<details class="card section defis"' + (window.DEFIS.every(defiDone) ? '' : ' open') + '><summary><b>' + icon('trophy') + ' Défis</b> <span class="small muted">' + window.DEFIS.filter(defiDone).length + ' / ' + window.DEFIS.length + ' réussis · pars d\'un espace vide, la vérification est automatique</span></summary>' +
+      '<div class="defi-list">' + window.DEFIS.map((d) => { const L = levelOf(d.level); return '<div class="defi" style="--c:' + L.color + '"><span class="lvl" style="--c:' + L.color + '">' + L.name + '</span><h3>' + E(d.title) + '</h3><p class="small">' + E(d.desc) + '</p>' +
+        '<div class="row between"><span class="badge' + (defiDone(d) ? ' ok">' + icon('check') + ' Réussi' : '">' + d.goals.length + ' étapes') + '</span><button class="btn sm" data-defi="' + d.id + '">Relever le défi</button></div></div>'; }).join('') + '</div></details>' +
+      '<div id="defi-card" class="card section" hidden></div>' +
       '<div class="card proj-bar"><label class="field" style="flex:1;min-width:180px"><span>Projet</span><select class="input" id="proj"></select></label>' +
       '<div class="row"><button class="btn sm" data-p="new">' + icon('plus') + ' Nouveau</button><button class="btn secondary sm" data-p="rename">Renommer</button><button class="btn secondary sm" data-p="export">' + icon('download') + ' Exporter</button>' +
       '<button class="btn secondary sm" data-p="import">' + icon('upload') + ' Importer</button><button class="btn ghost sm" data-p="delete">' + icon('trash') + ' Supprimer</button></div></div>' +
@@ -174,33 +179,67 @@
       '<div id="ws" class="section"></div>';
     const sel = $('#proj', v);
     const fillSel = () => { sel.innerHTML = list.map((p) => '<option value="' + p.id + '"' + (p.id === cur ? ' selected' : '') + '>' + E(p.name) + '</option>').join(''); };
-    const persist = () => {
+    const flush = () => {
       clearTimeout(saveT);
-      saveT = setTimeout(() => {
-        const p = list.find((x) => x.id === cur);
-        if (!p) return;
-        p.updated = Date.now();
-        if (!store.set(PK(cur), sim.dump({ name: p.name }))) App.toast('Enregistrement impossible : stockage plein.');
-        saveIndex(list);
-      }, 400);
+      const p = list.find((x) => x.id === cur);
+      if (!p || !sim) return;
+      p.updated = Date.now();
+      if (!store.set(PK(cur), sim.dump({ name: p.name }))) App.toast('Enregistrement impossible : stockage plein.');
+      saveIndex(list);
+      window.dispatchEvent(new Event('reviciel-change'));
     };
+    const persist = () => { clearTimeout(saveT); saveT = setTimeout(flush, 400); };
+    /* défi en cours : consignes vérifiées à chaque changement */
+    let prevRes = null;
+    function renderDefi() {
+      const box = $('#defi-card', v), p = list.find((x) => x.id === cur);
+      const d = p && p.defi && window.DEFIS.find((x) => x.id === p.defi);
+      if (!d) { box.hidden = true; box.innerHTML = ''; prevRes = null; return; }
+      const res = window.checkDefi(d, sim), n = res.filter(Boolean).length, all = n === res.length, L = levelOf(d.level);
+      if (prevRes && res.some((ok, k) => ok && !prevRes[k])) {
+        if (all) { App.toast('Défi réussi : « ' + d.title + ' » !', { duration: 6000 }); Store.setLab('defi:' + d.id, { goals: res, done: true }); }
+        else App.toast('Étape réussie ✓', { duration: 1800 });
+      }
+      prevRes = res;
+      box.hidden = false;
+      box.innerHTML = '<div class="row between" style="margin-bottom:8px"><h3 style="margin:0">' + icon('trophy') + ' Défi : ' + E(d.title) + '</h3><span class="badge ' + (all ? 'ok' : '') + '">' + n + ' / ' + res.length + '</span></div>' + bar(n / res.length, L.color) +
+        (all ? '<p class="status-ok" style="margin:10px 0 0">Bravo, défi réussi ! Essaie le suivant dans la liste des défis.</p>' : '') +
+        '<ol class="goals">' + d.goals.map((g, k) => '<li class="' + (res[k] ? 'done' : '') + '"><span class="gk">' + (res[k] ? icon('check') : k + 1) + '</span><div><div>' + E(g.t) + '</div>' +
+          (res[k] ? '' : '<button class="hint-btn" data-hint="' + k + '">Indice</button><div class="hint" id="dhint-' + k + '" hidden>' + E(g.hint) + '</div>') + '</div></li>').join('') + '</ol>';
+    }
     function open(id) {
       if (ws) { ws.destroy(); ws = null; }
       cur = id;
       store.set(CUR, id);
       try { sim = NS.fromDump(store.get(PK(id)) || '{"devices":[],"links":[]}'); } catch (e) { sim = new NS.Sim({ devices: [], links: [] }); App.toast('Projet illisible : on repart d\'un espace vide.'); }
       fillSel();
-      ws = A.Workspace($('#ws', v), { sim: () => sim, world: { w: 960, h: 520 }, canPlace: true, canCable: true, changed: persist });
+      prevRes = null;
+      ws = A.Workspace($('#ws', v), { sim: () => sim, world: { w: 960, h: 520 }, canPlace: true, canCable: true, changed: () => { persist(); renderDefi(); } });
+      renderDefi();
     }
-    sel.addEventListener('change', () => { clearTimeout(saveT); store.set(PK(cur), sim.dump({ name: (list.find((x) => x.id === cur) || {}).name })); open(sel.value); });
+    sel.addEventListener('change', () => { flush(); open(sel.value); });
     v.addEventListener('click', async (e) => {
+      const hb = e.target.closest('#defi-card [data-hint]');
+      if (hb) { const h = $('#dhint-' + hb.dataset.hint, v); h.hidden = !h.hidden; return; }
+      const db = e.target.closest('[data-defi]');
+      if (db) {
+        const d = window.DEFIS.find((x) => x.id === db.dataset.defi);
+        flush();
+        const id = newProject('Défi : ' + d.title);
+        list.find((x) => x.id === id).defi = d.id;
+        saveIndex(list);
+        open(id);
+        $('.defis', v).open = false;
+        $('#defi-card', v).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
       const b = e.target.closest('[data-p]');
       if (!b) return;
       const p = list.find((x) => x.id === cur);
       if (b.dataset.p === 'new') {
         const name = prompt('Nom du nouveau projet :', 'Réseau ' + (list.length + 1));
         if (name == null) return;
-        persist(); open(newProject(name.trim() || 'Réseau ' + (list.length + 1)));
+        flush(); open(newProject(name.trim() || 'Réseau ' + (list.length + 1)));
       } else if (b.dataset.p === 'rename' && p) {
         const name = prompt('Nouveau nom :', p.name);
         if (name && name.trim()) { p.name = name.trim(); saveIndex(list); fillSel(); persist(); }
@@ -218,6 +257,7 @@
       } else if (b.dataset.p === 'delete' && p) {
         if (!confirm('Supprimer définitivement le projet « ' + p.name + ' » ?')) return;
         store.del(PK(cur));
+        try { const t = JSON.parse(store.get('reviciel.atelier.supprimes') || '{}'); t[cur] = Date.now(); store.set('reviciel.atelier.supprimes', JSON.stringify(t)); } catch (err) { /* rien */ }
         list = list.filter((x) => x.id !== cur);
         saveIndex(list);
         if (!list.length) newProject('Réseau 1');
@@ -225,6 +265,6 @@
       }
     });
     open(cur);
-    return () => { clearTimeout(saveT); if (sim) store.set(PK(cur), sim.dump({ name: (list.find((x) => x.id === cur) || {}).name })); if (ws) ws.destroy(); };
+    return () => { flush(); if (ws) ws.destroy(); };
   });
 })();

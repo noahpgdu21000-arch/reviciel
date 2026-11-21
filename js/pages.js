@@ -53,6 +53,7 @@
         if (x.k.indexOf('f:') === 0) { const f = RC.fiche(x.k.slice(2)); name = f ? f.title : 'Fiche supprimée'; }
         else if (x.k.indexOf('x:') === 0) { const f = RC.fiche(x.k.slice(2)); name = 'Exercices : ' + (f ? f.title : 'fiche supprimée'); }
         else if (x.k.indexOf('s:') === 0) { const s = RC.SUBJ[x.k.slice(2)]; name = 'Quiz ' + (s ? s.name : ''); }
+        else if (x.k.indexOf('c:') === 0) name = App.ctrlLabel(x.k) + ' (' + String(Math.round(x.p * 0.4) / 2).replace('.', ',') + '/20)';
         return '<li class="row between"><span>' + E(name) + ' <span class="small muted">· ' + x.d.split('-').reverse().join('/') + '</span></span><span class="badge ' + (x.p >= 80 ? 'ok' : x.p >= 50 ? 'warn' : 'bad') + '">' + x.p + ' %</span></li>';
       }).join('') + '</ul></div>';
     }
@@ -86,7 +87,7 @@
         '<div class="settings-row"><div class="lbl"><b>Mode hors connexion</b><span>' + appStatus + '</span></div></div>' +
         (P && P.canInstall() ? '<div class="settings-row"><div class="lbl"><b>Installer l\'appli</b><span>Ajoute RéviCIEL à ton écran d\'accueil ou à ton PC.</span></div><button class="btn" data-act="install">' + icon('phone') + ' Installer</button></div>' : '') +
         (P && P.isIOS() && !P.isStandalone() ? '<div class="settings-row"><div class="lbl"><b>Installer sur iPhone / iPad</b><span>Dans Safari : bouton Partager → « Sur l\'écran d\'accueil ».</span></div></div>' : '') +
-        '<div class="settings-row"><div class="lbl"><b>Version PC à télécharger</b><span>Un fichier .zip : la version hors ligne (sans installation) et un installateur Windows.</span></div><a class="btn secondary" href="https://github.com/noahpgdu21000-arch/reviciel/releases/latest/download/ReviCIEL-PC.zip" rel="noopener">' + icon('download') + ' Télécharger</a></div>' +
+        '<div class="settings-row"><div class="lbl"><b>Version PC à télécharger</b><span>Un fichier .zip : la version hors ligne (sans installation) et un installateur Windows.</span></div><a class="btn secondary" href="https://reviciel.web.app/dist/ReviCIEL-PC.zip" rel="noopener">' + icon('download') + ' Télécharger</a></div>' +
         (P && P.reg ? '<div class="settings-row"><div class="lbl"><b>Mises à jour</b><span>Version du contenu : ' + E((window.REVICIEL_CONTENT || {}).version || '?') + '</span></div><button class="btn secondary" data-act="update">' + icon('refresh') + ' Vérifier</button></div>' : '') +
         '</div>' +
         '<div class="card section"><h2>Mes données</h2><p class="small muted">Ta progression et tes fiches perso sont enregistrées uniquement dans ce navigateur. Exporte une sauvegarde pour les transférer sur un autre appareil.</p>' +

@@ -132,6 +132,11 @@
         i++;
         while (i < lines.length && lines[i].trim() !== fence) { buf.push(lines[i]); i++; }
         i++;
+        if (lang === 'schema') { // schéma dessiné (voir js/schemas.js) + légende
+          var sname = (buf[0] || '').trim(), sv = global.SCHEMAS && global.SCHEMAS[sname], cap = buf.slice(1).join(' ').trim();
+          out.push('<figure class="schema">' + (sv || '<p class="muted">[schéma « ' + esc(sname) + ' »]</p>') + (cap ? '<figcaption>' + inline(cap) + '</figcaption>' : '') + '</figure>');
+          continue;
+        }
         out.push('<pre><code' + (lang ? ' class="lang-' + esc(lang) + '"' : '') + '>' + esc(buf.join('\n')) + '</code></pre>');
         continue;
       }

@@ -36,6 +36,11 @@ Pour communiquer, deux machines doivent respecter les mêmes règles (==protocol
 | Internet | 3 |
 | Accès réseau | 1, 2 |
 
+~~~schema
+osi-tcpip
+Les couches OSI et leurs équivalents TCP/IP, avec des exemples de protocoles et d'équipements.
+~~~
+
 ## L'encapsulation
 
 À l'**émission**, chaque couche ajoute son ==en-tête== (et parfois une fin) aux données reçues de la couche du dessus : données → segment (+ en-tête TCP avec les **ports**) → paquet (+ en-tête IP avec les **adresses IP**) → trame (+ en-tête Ethernet avec les **adresses MAC**) → bits sur le câble.

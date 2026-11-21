@@ -35,6 +35,11 @@ Exemples : signal carré d'une horloge numérique, signal triangulaire, tension 
 > [!definition] Valeur efficace
 > La valeur efficace d'une tension alternative est la valeur de la tension continue qui produirait le **même effet thermique** dans une résistance. C'est elle qu'affiche le multimètre en position alternatif (AC, symbole ~).
 
+~~~schema
+signal-periodique
+On lit Umax sur l'axe vertical et la période T entre deux maximums successifs.
+~~~
+
 ## Le secteur électrique
 
 En France, le secteur fournit une tension sinusoïdale de ==230 V efficaces== à ==50 Hz== :

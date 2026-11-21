@@ -700,6 +700,85 @@ Un client appelle : « **PC1 n'arrive pas à joindre PC2** ». Le réseau a ét�
     };
   }
 
+  /* ---------- Défis du mode libre : on part d'un espace vide, la vérification est automatique ---------- */
+  function defiTools(sim) {
+    const NS = global.NetSim, ip = NS.ipToInt;
+    const devs = () => sim.order.map((id) => sim.devices[id]);
+    const hosts = () => devs().filter((d) => NS.isHost(d.type));
+    const ofType = (t) => devs().filter((d) => d.type === t);
+    const peerTypes = (id) => sim.links.filter((l) => l.cable !== 'console' && (l.a[0] === id || l.b[0] === id)).map((l) => sim.devices[l.a[0] === id ? l.b[0] : l.a[0]].type);
+    const ipsOf = (d) => (NS.isHost(d.type) ? (d.pc.ip != null ? [{ ip: d.pc.ip, mask: d.pc.mask }] : []) : Object.keys(d.cfg.ifs).map((n) => d.cfg.ifs[n]).filter((i) => i.ip != null));
+    const owner = (a) => devs().find((d) => ipsOf(d).some((x) => x.ip === a));
+    /* pings réussis (enregistrés par l'invite de commandes ou le Message simple) et toujours valables */
+    const pings = () => {
+      const out = [];
+      devs().forEach((d) => Object.keys(d.pingOk || {}).forEach((s) => {
+        const a = ip(s), t = owner(a);
+        if (a != null && t && t.id !== d.id && sim.ping(d.id, a).ok) out.push({ from: d, to: t, ip: a });
+      }));
+      return out;
+    };
+    const apipa = (d) => d.pc.ip != null && d.pc.ip >>> 16 === ((169 << 8) | 254);
+    return { NS, ip, devs, hosts, ofType, peerTypes, ipsOf, owner, pings, apipa };
+  }
+  const DEFIS = [
+    {
+      id: 'reseau-local', level: 1, title: 'Mon premier réseau local',
+      desc: 'Un switch, trois postes, des adresses IP et un ping qui marche.',
+      goals: [
+        { t: 'Pose un switch et au moins 3 PC ou portables', hint: 'Palette du bas : Switch, puis PC ou Portable. Touche l\'espace de travail pour les poser.', c: (x) => x.ofType('switch').length >= 1 && x.hosts().length >= 3 },
+        { t: 'Relie chaque poste au switch (voyants verts)', hint: 'Câble droit (ou Auto) entre le port FastEthernet0 de chaque poste et un port du switch.', c: (x, sim) => x.hosts().length >= 3 && x.hosts().every((h) => sim.ifUp(h.id) && x.peerTypes(h.id).indexOf('switch') !== -1) },
+        { t: 'Donne aux postes des adresses du réseau 192.168.10.0 /24', hint: 'Touche un poste → Bureau → Configuration IP : 192.168.10.1, .2, .3… avec le masque 255.255.255.0.', c: (x) => x.hosts().length >= 3 && x.hosts().every((h) => h.pc.ip != null && h.pc.mask === x.ip('255.255.255.0') && x.NS.net(h.pc.ip, h.pc.mask) === x.ip('192.168.10.0')) },
+        { t: 'Réussis un ping entre deux postes', hint: 'Invite de commandes d\'un poste : ping 192.168.10.2, ou l\'enveloppe « Message simple ».', c: (x) => x.pings().some((p) => x.NS.isHost(p.from.type) && x.NS.isHost(p.to.type)) }
+      ]
+    },
+    {
+      id: 'console', level: 1, title: 'Configurer un switch neuf par la console',
+      desc: 'Câble console, Terminal du PC, nom du switch et sauvegarde.',
+      goals: [
+        { t: 'Branche un câble console entre un PC et un switch', hint: 'Câble Console : port RS232 du PC → port Console du switch.', c: (x, sim) => sim.links.some((l) => l.cable === 'console' && sim.cableOk(l) && [sim.devices[l.a[0]].type, sim.devices[l.b[0]].type].indexOf('switch') !== -1) },
+        { t: 'Ouvre le Terminal du PC', hint: 'Touche le PC → Bureau → Terminal.', c: (x) => x.hosts().some((h) => h.used && h.used.terminal) },
+        { t: 'Donne un nom au switch (hostname)', hint: 'enable → configure terminal → hostname SW-CIEL', c: (x) => x.ofType('switch').some((s) => s.cfg.hostname !== 'Switch') },
+        { t: 'Enregistre la configuration du switch', hint: 'end puis copy running-config startup-config (et Entrée).', c: (x, sim) => x.ofType('switch').some((s) => s.cfg.hostname !== 'Switch' && sim.saved(s.id)) }
+      ]
+    },
+    {
+      id: 'site-web', level: 2, title: 'Le site web de la classe',
+      desc: 'Un serveur web, un nom DNS et un navigateur qui affiche la page.',
+      goals: [
+        { t: 'Ajoute un serveur avec une adresse IP, relié au réseau', hint: 'Pose un Serveur, câble-le au switch, puis Config → adresse IP (par exemple 192.168.10.100 /24).', c: (x, sim) => x.ofType('server').some((s) => s.pc.ip != null && sim.ifUp(s.id)) },
+        { t: 'Dans le service DNS du serveur, crée le nom www.ciel.lan', hint: 'Serveur → Services → DNS : On, nom www.ciel.lan, adresse = celle du serveur web.', c: (x) => x.ofType('server').some((s) => s.services.dns.on && s.services.dns.records.some((r) => r.name.toLowerCase() === 'www.ciel.lan' && x.owner(r.ip) && x.owner(r.ip).type === 'server')) },
+        { t: 'Indique ce serveur DNS dans la configuration IP d\'un PC', hint: 'PC → Bureau → Configuration IP → Serveur DNS = adresse du serveur.', c: (x) => x.hosts().some((h) => h.type !== 'server' && h.pc.dns != null && x.ofType('server').some((s) => s.pc.ip === h.pc.dns && s.services.dns.on)) },
+        { t: 'Ouvre http://www.ciel.lan dans le navigateur d\'un PC', hint: 'PC → Bureau → Navigateur web → www.ciel.lan → Aller.', c: (x, sim) => x.hosts().some((h) => h.type !== 'server' && h.used && h.used['web-ok'] && sim.browse(h.id, 'www.ciel.lan').ok) }
+      ]
+    },
+    {
+      id: 'dhcp-auto', level: 2, title: 'Des adresses automatiques avec DHCP',
+      desc: 'Un serveur DHCP distribue les adresses : plus besoin de les taper.',
+      goals: [
+        { t: 'Active un service DHCP (sur un serveur ou un routeur)', hint: 'Serveur → Services → DHCP : On, adresse de départ, masque, puis Enregistrer. Le serveur doit avoir une adresse fixe dans ce réseau.', c: (x) => x.ofType('server').some((s) => s.services.dhcp.on && s.services.dhcp.start != null && s.pc.ip != null) || x.ofType('router').some((r) => Object.keys(r.cfg.pools).length > 0) },
+        { t: 'Au moins 3 postes reçoivent une adresse en DHCP', hint: 'Sur chaque poste : Configuration IP → DHCP. Une adresse en 169.254.x.x veut dire « pas de réponse du serveur ».', c: (x) => x.hosts().filter((h) => h.pc.dhcp && h.pc.ip != null && !x.apipa(h)).length >= 3 },
+        { t: 'Ping réussi entre deux postes en DHCP', hint: 'ipconfig pour lire l\'adresse reçue, puis ping vers un autre poste.', c: (x) => x.pings().some((p) => p.from.pc && p.from.pc.dhcp && p.to.pc && p.to.pc.dhcp) }
+      ]
+    },
+    {
+      id: 'deux-reseaux', level: 3, title: 'Deux réseaux reliés par un routeur',
+      desc: 'Deux switchs, deux réseaux IP, un routeur et des passerelles bien réglées.',
+      goals: [
+        { t: 'Un routeur relié à au moins deux switchs', hint: 'Câble droit entre GigabitEthernet0/0 du routeur et un switch, puis GigabitEthernet0/1 et un autre switch.', c: (x) => x.ofType('router').some((r) => x.peerTypes(r.id).filter((t) => t === 'switch').length >= 2) },
+        { t: 'Deux interfaces du routeur allumées, dans deux réseaux différents', hint: 'CLI du routeur : interface g0/0 → ip address 192.168.1.1 255.255.255.0 → no shutdown ; même chose pour g0/1 en 192.168.2.1.', c: (x, sim) => x.ofType('router').some((r) => { const nets = Object.keys(r.cfg.ifs).filter((n) => r.cfg.ifs[n].ip != null && sim.ifUp(r.id, n)).map((n) => x.NS.net(r.cfg.ifs[n].ip, r.cfg.ifs[n].mask)); return new Set(nets).size >= 2; }) },
+        { t: 'Chaque poste a pour passerelle l\'adresse du routeur de son réseau', hint: 'Configuration IP → Passerelle = adresse de l\'interface du routeur dans le même réseau.', c: (x) => { const gws = x.ofType('router').flatMap((r) => x.ipsOf(r)); const hs = x.hosts(); return hs.length >= 2 && hs.every((h) => h.pc.ip != null && gws.some((g) => g.ip === h.pc.gw && x.NS.same(h.pc.ip, g.ip, h.pc.mask))) && new Set(hs.map((h) => x.NS.net(h.pc.ip, h.pc.mask))).size >= 2; } },
+        { t: 'Ping réussi entre deux postes de réseaux différents', hint: 'Depuis un poste du réseau 1 : ping vers un poste du réseau 2.', c: (x) => x.pings().some((p) => x.NS.isHost(p.from.type) && x.NS.isHost(p.to.type) && !x.NS.same(p.from.pc.ip, p.to.pc.ip, p.from.pc.mask)) }
+      ]
+    }
+  ];
+  function checkDefi(defi, sim) {
+    const x = defiTools(sim);
+    return defi.goals.map((g) => { try { return !!g.c(x, sim); } catch (e) { return false; } });
+  }
+
+  global.DEFIS = DEFIS;
+  global.checkDefi = checkDefi;
   global.LABS = LABS;
   global.LAB_LEVELS = LEVELS;
   global.labHelpers = labHelpers;

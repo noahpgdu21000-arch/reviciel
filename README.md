@@ -17,12 +17,15 @@ et l'enseignement professionnel CIEL. Une fois ouverte une première fois, l'app
   verbes irréguliers, signaux et énergie, suites et second degré, salaire et heures sup
 - **Mode caché** (les mots clés surlignés deviennent des trous à deviner), lecture à voix haute, impression
 - **Mes fiches** : crée tes propres fiches (avec cartes et quiz), importe/exporte-les
+- **Mode contrôle** noté sur 20 (chrono, corrigé) et **planning de révision** avant un contrôle
+- **Comptes en ligne** (Firebase) : synchronisation entre PC, téléphone et site ; onglet **Partage** des fiches entre élèves
+- **Défis** du Labo réseau (mode libre) et **schémas** dans les fiches (circuits, réseau, IPv4, OSI, signal, trigonométrie)
 - Progression par matière, série de jours, recherche, favoris, thème clair/sombre
 
 ## Le site web
 
-**https://noahpgdu21000-arch.github.io/reviciel/** (hébergé gratuitement par GitHub Pages,
-dépôt : https://github.com/noahpgdu21000-arch/reviciel).
+**https://reviciel.web.app** (hébergé gratuitement par Firebase Hosting, projet Firebase « reviciel »).
+L'ancien lien GitHub Pages affiche un bandeau qui redirige les élèves vers le nouveau.
 
 ## L'appli sur PC
 
@@ -33,7 +36,7 @@ Sans rien installer, `dist\RéviCIEL-hors-ligne.html` contient aussi tout le sit
 
 ## L'appli sur téléphone (hors connexion)
 
-1. Sur ton téléphone, ouvre **https://noahpgdu21000-arch.github.io/reviciel/** (avec internet, une seule fois).
+1. Sur ton téléphone, ouvre **https://reviciel.web.app** (avec internet, une seule fois).
 2. **Android (Chrome)** : menu ⋮ → *Installer l'application* (ou *Ajouter à l'écran d'accueil*).
    **iPhone (Safari)** : bouton *Partager* → *Sur l'écran d'accueil*.
 3. L'icône RéviCIEL marche ensuite **sans internet**.
@@ -47,8 +50,9 @@ Après avoir ajouté ou modifié des fiches dans `fiches\` : double-clique sur *
 Il reconstruit le site, l'envoie sur GitHub, et le site se met à jour en 1 à 2 minutes.
 À la prochaine ouverture, l'appli (PC ou téléphone) affiche « Nouvelle version disponible → Mettre à jour ».
 
-> La progression est enregistrée dans le navigateur de chaque appareil. Pour la transférer :
-> *Paramètres → Exporter* sur un appareil, puis *Importer* sur l'autre.
+> Avec un compte (*Mon compte*, gratuit), la progression, les fiches perso et les réseaux du labo se synchronisent
+> tout seuls entre tous les appareils. Sans compte : *Paramètres → Exporter* puis *Importer* sur l'autre appareil.
+> `publier.bat` met en ligne le site **et** les règles d'accès à la base (`firestore.rules`).
 
 ## Ajouter ou modifier des fiches
 
