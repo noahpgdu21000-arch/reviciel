@@ -86,21 +86,88 @@
     return c;
   }
 
+  /* PC, portable et serveur sont des « hôtes » (une carte réseau, une invite de commandes) */
+  function isHost(t) { return t === 'pc' || t === 'laptop' || t === 'server'; }
+  function defaultServices() {
+    return {
+      http: { on: true, page: 'Bienvenue sur le serveur web !' },
+      dns: { on: false, records: [] },
+      dhcp: { on: false, gw: null, dns: null, start: null, mask: null, max: 50 }
+    };
+  }
+  function makeDevice(s, k) {
+    const d = { id: s.id, type: s.type, label: s.label || s.id, x: s.x, y: s.y, mode: 'user', ctx: null, pending: null, used: {}, history: [], screen: '', pingOk: {}, pingFail: {}, arp: {} };
+    d.mac = '00D0.' + hex4(0x58A1 + k * 977) + '.' + hex4(0x1C07 + k * 4099);
+    if (isHost(s.type)) {
+      d.pc = Object.assign({ ip: null, mask: null, gw: null, dns: null, dhcp: false }, s.pc ? {
+        ip: s.pc.ip ? ipToInt(s.pc.ip) : null, mask: s.pc.mask ? ipToInt(s.pc.mask) : null, gw: s.pc.gw ? ipToInt(s.pc.gw) : null, dns: s.pc.dns ? ipToInt(s.pc.dns) : null, dhcp: !!s.pc.dhcp
+      } : {});
+      if (s.type === 'server') { d.services = defaultServices(); d.leases = {}; }
+    } else { d.cfg = defaultCfg(s.type); d.startup = null; d.leases = {}; }
+    return d;
+  }
+
   function Sim(lab) {
     this.devices = {};
     this.order = [];
-    lab.devices.forEach((s, k) => {
-      const d = { id: s.id, type: s.type, label: s.label || s.id, x: s.x, y: s.y, mode: 'user', ctx: null, pending: null, used: {}, history: [], screen: '', pingOk: {}, pingFail: {}, arp: {} };
-      d.mac = '00D0.' + hex4(0x58A1 + k * 977) + '.' + hex4(0x1C07 + k * 4099);
-      if (s.type === 'pc') d.pc = Object.assign({ ip: null, mask: null, gw: null, dns: null, dhcp: false }, s.pc ? {
-        ip: s.pc.ip ? ipToInt(s.pc.ip) : null, mask: s.pc.mask ? ipToInt(s.pc.mask) : null, gw: s.pc.gw ? ipToInt(s.pc.gw) : null, dns: s.pc.dns ? ipToInt(s.pc.dns) : null, dhcp: !!s.pc.dhcp
-      } : {});
-      else { d.cfg = defaultCfg(s.type); d.startup = null; d.leases = {}; }
+    this.macSeq = 0;
+    lab.devices.forEach((s) => {
+      const d = makeDevice(s, this.macSeq++);
       this.devices[d.id] = d;
       this.order.push(d.id);
     });
-    this.links = lab.links.map((l) => ({ a: [l[0], l[1]], b: [l[2], l[3]] }));
+    this.links = lab.links.map((l) => ({ a: [l[0], l[1]], b: [l[2], l[3]], cable: l[4] || 'auto' }));
   }
+
+  /* ---------- Ports, câbles, ajout et suppression ---------- */
+  const PREFIX = { router: 'Router', switch: 'Switch', pc: 'PC', laptop: 'Laptop', server: 'Server' };
+  const isConsolePort = (n) => n === 'Console' || n === 'RS232';
+  Sim.prototype.ports = function (id) {
+    const d = this.devices[id];
+    if (isHost(d.type)) return ['FastEthernet0', 'RS232'];
+    return sortIfs(Object.keys(d.cfg.ifs).filter((n) => n.indexOf('Vlan') !== 0 && n.indexOf('.') === -1)).concat(['Console']);
+  };
+  Sim.prototype.linkOf = function (id, ifn) {
+    for (const l of this.links) {
+      if (l.a[0] === id && l.a[1] === ifn) return { l, peer: l.b };
+      if (l.b[0] === id && l.b[1] === ifn) return { l, peer: l.a };
+    }
+    return null;
+  };
+  Sim.prototype.portUsed = function (id, ifn) { return !!this.linkOf(id, ifn); };
+  /* câble droit entre équipements différents (PC/routeur ↔ switch), croisé entre équipements semblables */
+  Sim.prototype.rightCable = function (a, b) {
+    const cls = (t) => (t === 'switch' ? 'x' : 'n');
+    return cls(this.devices[a].type) === cls(this.devices[b].type) ? 'croise' : 'droit';
+  };
+  Sim.prototype.cableOk = function (l) {
+    if (l.cable === 'console') return isConsolePort(l.a[1]) && isConsolePort(l.b[1]) && l.a[1] !== l.b[1];
+    if (isConsolePort(l.a[1]) || isConsolePort(l.b[1])) return false;
+    if (!l.cable || l.cable === 'auto') return true;
+    return l.cable === this.rightCable(l.a[0], l.b[0]);
+  };
+  Sim.prototype.addDevice = function (type, x, y) {
+    let k = 0;
+    while (this.devices[PREFIX[type] + k]) k++;
+    const d = makeDevice({ id: PREFIX[type] + k, type, x, y }, this.macSeq++ + 37);
+    this.devices[d.id] = d;
+    this.order.push(d.id);
+    return d.id;
+  };
+  Sim.prototype.removeDevice = function (id) {
+    this.links = this.links.filter((l) => l.a[0] !== id && l.b[0] !== id);
+    this.order = this.order.filter((x) => x !== id);
+    delete this.devices[id];
+  };
+  Sim.prototype.addLink = function (a, ia, b, ib, cable) {
+    if (a === b) return 'Impossible de relier un équipement à lui-même.';
+    if (this.portUsed(a, ia) || this.portUsed(b, ib)) return 'Ce port est déjà utilisé.';
+    if (cable === 'console' && !(isConsolePort(ia) && isConsolePort(ib) && ia !== ib)) return 'Un câble console relie le port RS232 d\'un PC au port Console d\'un routeur ou d\'un switch.';
+    if (cable !== 'console' && (isConsolePort(ia) || isConsolePort(ib))) return 'Les ports Console et RS232 se branchent avec un câble console.';
+    this.links.push({ a: [a, ia], b: [b, ib], cable: cable || 'auto' });
+    return null;
+  };
+  Sim.prototype.removeLink = function (l) { this.links = this.links.filter((x) => x !== l); };
 
   Sim.prototype.peerOf = function (id, ifn) {
     for (const l of this.links) {
@@ -111,20 +178,20 @@
   };
   Sim.prototype.adminUp = function (id, ifn) {
     const d = this.devices[id];
-    if (d.type === 'pc') return true;
+    if (isHost(d.type)) return true;
     const i = d.cfg.ifs[ifn];
     return !!i && !i.shutdown;
   };
   /* lien physique : câble branché et les deux côtés activés */
   Sim.prototype.physUp = function (id, ifn) {
-    const p = this.peerOf(id, ifn);
-    return !!p && this.adminUp(id, ifn) && this.adminUp(p[0], p[1]);
+    const x = this.linkOf(id, ifn);
+    return !!x && x.l.cable !== 'console' && this.cableOk(x.l) && this.adminUp(id, ifn) && this.adminUp(x.peer[0], x.peer[1]);
   };
   function allowed(i, v) { return !i.allowed || i.allowed.indexOf(v) !== -1; }
   Sim.prototype.carries = function (d, n, v) { const i = d.cfg.ifs[n]; return i.mode === 'trunk' ? allowed(i, v) : i.vlan === v; };
   Sim.prototype.ifUp = function (id, ifn) {
     const d = this.devices[id];
-    if (d.type === 'pc') return this.physUp(id, 'FastEthernet0');
+    if (isHost(d.type)) return this.physUp(id, 'FastEthernet0');
     const i = d.cfg.ifs[ifn];
     if (!i) return false;
     if (ifn.indexOf('.') !== -1) return !i.shutdown && this.ifUp(id, ifn.split('.')[0]);
@@ -139,7 +206,7 @@
   /* ---------- Domaines de diffusion (VLAN, trunks, sous-interfaces) ---------- */
   Sim.prototype.side = function (id, ifn) {
     const d = this.devices[id];
-    if (d.type === 'pc') return { u: 'ep:' + id + ':nic' };
+    if (isHost(d.type)) return ifn === 'FastEthernet0' ? { u: 'ep:' + id + ':nic' } : null;
     const i = d.cfg.ifs[ifn];
     if (!i || i.shutdown) return null;
     const map = {};
@@ -164,6 +231,7 @@
     const find = (x) => { if (P[x] === undefined) P[x] = x; while (P[x] !== x) { P[x] = P[P[x]]; x = P[x]; } return x; };
     const union = (a, b) => { a = find(a); b = find(b); if (a !== b) P[a] = b; };
     this.links.forEach((l) => {
+      if (l.cable === 'console' || !this.cableOk(l)) return;
       const A = this.side(l.a[0], l.a[1]), B = this.side(l.b[0], l.b[1]);
       if (!A || !B) return;
       Object.keys(A).forEach((c) => { if (B[c]) union(A[c], B[c]); });
@@ -180,7 +248,7 @@
     const eps = [];
     this.order.forEach((id) => {
       const d = this.devices[id];
-      if (d.type === 'pc') {
+      if (isHost(d.type)) {
         if (d.pc.ip != null && d.pc.mask != null && this.ifUp(id)) eps.push({ dev: id, ifn: 'nic', key: 'ep:' + id + ':nic', ip: d.pc.ip, mask: d.pc.mask });
         return;
       }
@@ -251,7 +319,7 @@
         if (!ep) return { ok: false, why: 'noip', hops };
         if (same(ep.ip, dst, ep.mask)) nextIp = dst;
         else {
-          const gw = d.type === 'pc' ? d.pc.gw : d.cfg.gateway;
+          const gw = isHost(d.type) ? d.pc.gw : d.cfg.gateway;
           if (gw == null || !same(ep.ip, gw, ep.mask)) return { ok: false, why: 'nogw', hops };
           nextIp = gw;
         }
@@ -296,7 +364,7 @@
     return this.order.some((id) => {
       if (id === exceptDev) return false;
       const d = this.devices[id];
-      if (d.type === 'pc') return d.pc.ip === ip;
+      if (isHost(d.type)) return d.pc.ip === ip;
       return Object.keys(d.cfg.ifs).some((n) => d.cfg.ifs[n].ip === ip);
     });
   };
@@ -307,6 +375,21 @@
     const mySeg = find('ep:' + pcId + ':nic');
     for (const id of this.order) {
       const d = this.devices[id];
+      /* serveur DHCP (service du serveur) */
+      if (d.type === 'server' && d.services.dhcp.on && id !== pcId) {
+        const s = d.services.dhcp, me = d.pc;
+        if (me.ip == null || s.start == null || s.mask == null || !this.ifUp(id) || find('ep:' + id + ':nic') !== mySeg) continue;
+        const already = Object.keys(d.leases).find((ip) => d.leases[ip] === pc.mac);
+        if (already) return { ip: ipToInt(already), mask: s.mask, gw: s.gw, dns: s.dns, server: me.ip };
+        for (let k = 0; k < (s.max || 50); k++) {
+          const ip = (s.start + k) >>> 0;
+          if (!same(ip, s.start, s.mask)) break;
+          if (d.leases[ipStr(ip)] || this.ipInUse(ip, pcId)) continue;
+          d.leases[ipStr(ip)] = pc.mac;
+          return { ip, mask: s.mask, gw: s.gw, dns: s.dns, server: me.ip };
+        }
+        return { full: true };
+      }
       if (d.type !== 'router') continue;
       for (const n of Object.keys(d.cfg.ifs)) {
         const i = d.cfg.ifs[n];
@@ -336,6 +419,75 @@
       const d = this.devices[id];
       if (d.leases) Object.keys(d.leases).forEach((ip) => { if (d.leases[ip] === pc.mac) delete d.leases[ip]; });
     });
+  };
+
+  /* ---------- Services : DNS et web ---------- */
+  Sim.prototype.resolve = function (fromId, name) {
+    const ip = ipToInt(name);
+    if (ip != null) return { ip };
+    const d = this.devices[fromId], dns = d.pc ? d.pc.dns : null;
+    if (dns == null) return { err: 'nodns' };
+    const r = this.ping(fromId, dns);
+    if (!r.ok) return { err: 'dnsdown' };
+    const srv = this.devices[r.owner];
+    if (srv.type !== 'server' || !srv.services.dns.on) return { err: 'dnsdown' };
+    const rec = srv.services.dns.records.find((x) => x.name.toLowerCase() === String(name).toLowerCase());
+    return rec ? { ip: rec.ip, via: dns } : { err: 'notfound' };
+  };
+  Sim.prototype.browse = function (fromId, url) {
+    const host = String(url).trim().replace(/^https?:\/\//i, '').split(/[/:]/)[0];
+    if (!host) return { err: 'URL vide.' };
+    const res = this.resolve(fromId, host);
+    if (res.err === 'nodns') return { err: 'Aucun serveur DNS configuré sur ce PC : utilise l\'adresse IP du serveur, ou renseigne un DNS.' };
+    if (res.err) return { err: 'Impossible de trouver « ' + host + ' » (le serveur DNS ne répond pas ou ne connaît pas ce nom).' };
+    const r = this.ping(fromId, res.ip);
+    if (!r.ok) return { err: 'Le délai d\'attente de la requête est dépassé : ' + ipStr(res.ip) + ' ne répond pas.' };
+    const srv = this.devices[r.owner];
+    if (srv.type !== 'server' || !srv.services.http.on) return { err: 'Connexion refusée : aucun serveur web sur ' + ipStr(res.ip) + '.' };
+    return { ok: true, ip: res.ip, page: srv.services.http.page, server: srv.label };
+  };
+
+  /* ---------- Trajet d'un paquet (pour l'animation du mode Simulation) ---------- */
+  Sim.prototype.l2path = function (a, b) {
+    const prev = {}, q = [a];
+    prev[a] = null;
+    while (q.length) {
+      const cur = q.shift();
+      if (cur === b) break;
+      if (cur !== a && this.devices[cur].type !== 'switch') continue;
+      this.links.forEach((l) => {
+        let next = null, myPort = null;
+        if (l.a[0] === cur) { next = l.b[0]; myPort = l.a[1]; } else if (l.b[0] === cur) { next = l.a[0]; myPort = l.b[1]; }
+        if (next == null || next in prev || !this.physUp(cur, myPort)) return;
+        prev[next] = cur;
+        q.push(next);
+      });
+    }
+    if (!(b in prev)) return null;
+    const path = [];
+    for (let x = b; x != null; x = prev[x]) path.unshift(x);
+    return path;
+  };
+  Sim.prototype.trace = function (srcId, dst) {
+    const r = this.ping(srcId, dst);
+    const N = this.net();
+    const seq = [srcId];
+    (r.hops || []).forEach((ip) => { const e = N.eps.find((x) => x.ip === ip); if (e && seq[seq.length - 1] !== e.dev) seq.push(e.dev); });
+    if (r.ok && r.owner && seq[seq.length - 1] !== r.owner) seq.push(r.owner);
+    let path = [srcId];
+    for (let i = 1; i < seq.length; i++) {
+      const p = this.l2path(seq[i - 1], seq[i]);
+      if (!p) break;
+      path = path.concat(p.slice(1));
+    }
+    /* échec : on avance jusqu'au switch voisin pour montrer où le paquet se perd */
+    if (!r.ok && r.why !== 'noip' && r.why !== 'nogw') {
+      const last = path[path.length - 1];
+      const l = this.links.find((x) => (x.a[0] === last || x.b[0] === last) && this.physUp(last, x.a[0] === last ? x.a[1] : x.b[1]));
+      const nxt = l ? (l.a[0] === last ? l.b[0] : l.a[0]) : null;
+      if (nxt && this.devices[nxt].type === 'switch' && path.indexOf(nxt) === -1 && !(r.hops || []).length) path.push(nxt);
+    }
+    return { ok: r.ok, why: r.why, path, from: r.from };
   };
 
   /* ---------- Affichages « show » ---------- */
@@ -514,21 +666,33 @@
   Sim.prototype.save = function (id) { const d = this.devices[id]; d.startup = JSON.stringify(d.cfg); };
 
   /* ---------- Sauvegarde de l'état du lab ---------- */
-  const KEYS = ['cfg', 'startup', 'leases', 'pc', 'mode', 'ctx', 'pending', 'used', 'history', 'screen', 'pingOk', 'pingFail', 'arp'];
-  Sim.prototype.dump = function () {
-    return JSON.stringify({ v: 1, devices: this.order.map((id) => {
-      const d = this.devices[id], o = { id };
-      KEYS.forEach((k) => { if (d[k] !== undefined) o[k] = k === 'screen' ? String(d[k]).slice(-12000) : k === 'history' ? d[k].slice(-60) : d[k]; });
-      return o;
-    }) });
+  const KEYS = ['cfg', 'startup', 'leases', 'pc', 'services', 'mac', 'label', 'x', 'y', 'mode', 'ctx', 'pending', 'used', 'history', 'screen', 'pingOk', 'pingFail', 'arp'];
+  Sim.prototype.dump = function (meta) {
+    return JSON.stringify(Object.assign({ v: 2, app: 'RéviCIEL-réseau' }, meta || {}, {
+      devices: this.order.map((id) => {
+        const d = this.devices[id], o = { id, type: d.type };
+        KEYS.forEach((k) => { if (d[k] !== undefined) o[k] = k === 'screen' ? String(d[k]).slice(-12000) : k === 'history' ? d[k].slice(-60) : d[k]; });
+        return o;
+      }),
+      links: this.links
+    }));
   };
+  /* Recrée un réseau complet à partir d'une sauvegarde (mode libre, import de fichier) */
+  function fromDump(json) {
+    const s = typeof json === 'string' ? JSON.parse(json) : json;
+    if (!s || !Array.isArray(s.devices)) throw new Error('Fichier de réseau invalide.');
+    const sim = new Sim({ devices: s.devices.map((d) => ({ id: d.id, type: d.type, x: d.x, y: d.y, label: d.label })), links: [] });
+    sim.restore(JSON.stringify(s));
+    return sim;
+  }
   Sim.prototype.restore = function (json) {
     try {
       const s = JSON.parse(json);
       s.devices.forEach((x) => { const d = this.devices[x.id]; if (d) KEYS.forEach((k) => { if (x[k] !== undefined) d[k] = x[k]; }); });
+      if (Array.isArray(s.links) && s.links.every((l) => this.devices[l.a[0]] && this.devices[l.b[0]])) this.links = s.links.map((l) => ({ a: l.a.slice(), b: l.b.slice(), cable: l.cable || 'auto' }));
       return true;
     } catch (e) { return false; }
   };
 
-  global.NetSim = { Sim, ipToInt, ipStr, maskLen, net, same, normIf, shortIf, sortIfs, newIf, defaultCfg, type7, vlanList };
+  global.NetSim = { Sim, fromDump, isHost, ipToInt, ipStr, maskLen, net, same, normIf, shortIf, sortIfs, newIf, defaultCfg, type7, vlanList };
 })(window);

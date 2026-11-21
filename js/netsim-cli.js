@@ -2,7 +2,7 @@
    Abréviations (conf t, sh ip int br), aide « ? », complétion Tab, messages d'erreur réalistes. */
 (function (global) {
   'use strict';
-  const { ipToInt, ipStr, maskLen, net, same, normIf, newIf, defaultCfg } = NetSim;
+  const { ipToInt, ipStr, maskLen, net, same, normIf, newIf, defaultCfg, isHost } = NetSim;
 
   const PROMPT = { user: '>', priv: '#', config: '(config)#', if: '(config-if)#', subif: '(config-subif)#', range: '(config-if-range)#', vlan: '(config-vlan)#', line: '(config-line)#', dhcp: '(dhcp-config)#' };
   const SUBS = ['if', 'subif', 'range', 'vlan', 'line', 'dhcp'];
@@ -84,7 +84,7 @@
   }
 
   function promptOf(d) {
-    if (d.type === 'pc') return d.pending ? d.pending.prompt : 'C:\\>';
+    if (isHost(d.type)) return d.pending ? d.pending.prompt : 'C:\\>';
     if (d.pending && d.pending.prompt != null) return d.pending.prompt;
     return d.cfg.hostname + PROMPT[d.mode];
   }
@@ -511,7 +511,7 @@
   }
   function help(sim, id, before) {
     const d = sim.devices[id];
-    if (d.type === 'pc') return pcHelp();
+    if (isHost(d.type)) return pcHelp();
     if (d.pending) return '';
     d.used['?'] = true;
     const dd = viaDo(d, before);
@@ -534,7 +534,7 @@
   }
   function complete(sim, id, line) {
     const d = sim.devices[id];
-    if (d.type === 'pc' || d.pending || !line || /\s$/.test(line)) return line;
+    if (isHost(d.type) || d.pending || !line || /\s$/.test(line)) return line;
     const dd = viaDo(d, line);
     const text = dd ? dd.text : line, off = dd ? dd.offset : 0;
     if (!text) return line;
@@ -546,14 +546,14 @@
   }
   function ctrlZ(sim, id) {
     const d = sim.devices[id];
-    if (d.type === 'pc' || d.pending) return '';
+    if (isHost(d.type) || d.pending) return '';
     if (d.mode === 'user' || d.mode === 'priv') return '';
     d.mode = 'priv'; d.ctx = null;
     return sysMsg;
   }
   function boot(sim, id) {
     const d = sim.devices[id];
-    if (d.type === 'pc') return 'Invite de commandes du PC ' + d.label + ' (simulation)\nTape « help » pour la liste des commandes.\n';
+    if (isHost(d.type)) return 'Invite de commandes du PC ' + d.label + ' (simulation)\nTape « help » pour la liste des commandes.\n';
     return '\nPress RETURN to get started!\n\n' + (d.cfg.banner ? d.cfg.banner + '\n\n' : '');
   }
   /* Configuration initiale d'un lab (commandes tapées en mode configuration) */
@@ -567,7 +567,7 @@
 
   /* ---------- Invite de commandes du PC ---------- */
   function pcHelp() {
-    return 'Commandes disponibles :\n  ipconfig            afficher la configuration IP\n  ipconfig /all       configuration détaillée (MAC, DHCP, DNS)\n  ipconfig /renew     demander une adresse au serveur DHCP\n  ipconfig /release   libérer l\'adresse DHCP\n  ping <adresse>      tester la connexion\n  tracert <adresse>   afficher les routeurs traversés\n  ssh -l <compte> <adresse>   connexion SSH\n  telnet <adresse>    connexion Telnet\n  cls                 effacer l\'écran';
+    return 'Commandes disponibles :\n  ipconfig            afficher la configuration IP\n  ipconfig /all       configuration détaillée (MAC, DHCP, DNS)\n  ipconfig /renew     demander une adresse au serveur DHCP\n  ipconfig /release   libérer l\'adresse DHCP\n  ping <adresse>      tester la connexion\n  tracert <adresse>   afficher les routeurs traversés\n  nslookup <nom>      interroger le serveur DNS\n  ssh -l <compte> <adresse>   connexion SSH\n  telnet <adresse>    connexion Telnet\n  cls                 effacer l\'écran';
   }
   const macDash = (m) => m.replace(/\./g, '').match(/.{2}/g).join('-');
   function ipconfig(sim, d, all) {
@@ -596,7 +596,7 @@
     const head = 'Envoi d\'une requête \'Ping\'  ' + s + ' avec 32 octets de données :';
     const r = sim.ping(d.id, dst);
     let line, rec;
-    if (r.ok) { line = 'Réponse de ' + s + ' : octets=32 temps<1ms TTL=' + ((sim.devices[r.owner].type === 'pc' ? 128 : 255) - r.hops.length); rec = 4; d.pingOk[s] = 1; }
+    if (r.ok) { line = 'Réponse de ' + s + ' : octets=32 temps<1ms TTL=' + ((isHost(sim.devices[r.owner].type) ? 128 : 255) - r.hops.length); rec = 4; d.pingOk[s] = 1; }
     else if ((r.why === 'noroute' || r.why === 'acl') && r.from != null) { line = 'Réponse de ' + ipStr(r.from) + ' : Impossible de joindre l\'hôte de destination.'; rec = 4; d.pingFail[s] = 1; }
     else if (r.why === 'noip' || r.why === 'nogw') { line = 'Échec de la transmission. Défaillance générale.'; rec = 0; d.pingFail[s] = 1; }
     else { line = 'Délai d\'attente de la demande dépassé.'; rec = 0; d.pingFail[s] = 1; }
@@ -621,7 +621,7 @@
     const r = sim.ping(d.id, ip);
     if (!r.ok) return 'Trying ' + ipStr(ip) + ' ...\n% Connection timed out; remote host not responding';
     const dev = sim.devices[r.owner];
-    if (dev.type === 'pc') return '% Connection refused by remote host';
+    if (isHost(dev.type)) return '% Connection refused by remote host';
     const v = dev.cfg.lines.vty, t = v.transport || 'all';
     if ((t !== 'all' && t.indexOf(proto) === -1) || (proto === 'ssh' && !dev.cfg.rsa)) return '% Connection refused by remote host';
     if (!v.login) return 'Password required, but none set\n\n[Connection to ' + ipStr(ip) + ' closed by foreign host]';
@@ -659,8 +659,26 @@
       }
       return 'Erreur : option non reconnue « ' + w[1] + ' ».';
     }
-    if (cmd === 'ping') { const ip = ipArg(); return ip == null ? 'La requête Ping n\'a pas pu trouver l\'hôte ' + (w[1] || '') + '. Vérifiez le nom et essayez à nouveau.' : pcPing(sim, d, ip); }
-    if (cmd === 'tracert') { const ip = ipArg(); return ip == null ? 'Impossible de résoudre le nom du système cible ' + (w[1] || '') + '.' : pcTrace(sim, d, ip); }
+    /* adresse IP ou nom (résolu par le serveur DNS configuré sur le PC) */
+    const target = () => {
+      const ip = ipArg();
+      if (ip != null) return ip;
+      const name = w.slice(1).find((s) => s[0] !== '-');
+      if (!name) return null;
+      const r = sim.resolve(id, name);
+      return r.err ? null : r.ip;
+    };
+    if (cmd === 'ping') { const ip = target(); return ip == null ? 'La requête Ping n\'a pas pu trouver l\'hôte ' + (w[1] || '') + '. Vérifiez le nom et essayez à nouveau.' : pcPing(sim, d, ip); }
+    if (cmd === 'tracert') { const ip = target(); return ip == null ? 'Impossible de résoudre le nom du système cible ' + (w[1] || '') + '.' : pcTrace(sim, d, ip); }
+    if (cmd === 'nslookup') {
+      const name = w[1];
+      if (!name) return 'Utilisation : nslookup <nom>';
+      const r = sim.resolve(id, name), srv = d.pc.dns != null ? ipStr(d.pc.dns) : 'inconnu';
+      if (r.err === 'nodns') return 'Aucun serveur DNS configuré sur ce poste (Configuration IP → DNS).';
+      if (r.err === 'dnsdown') return 'DNS request timed out.\nServeur :   Inconnu\nAddress:  ' + srv + '\n\n*** La requête vers le serveur DNS a expiré.';
+      if (r.err === 'notfound') return 'Serveur :   ' + srv + '\nAddress:  ' + srv + '\n\n*** ' + srv + ' ne parvient pas à trouver ' + name + ' : Non-existent domain';
+      return 'Serveur :   ' + srv + '\nAddress:  ' + srv + '\n\nNom :     ' + name + '\nAddress:  ' + ipStr(r.ip);
+    }
     if (cmd === 'ssh') {
       let user = null, ip = null;
       for (let k = 1; k < w.length; k++) { if (w[k] === '-l') user = w[++k]; else if (ipToInt(w[k]) != null) ip = ipToInt(w[k]); }

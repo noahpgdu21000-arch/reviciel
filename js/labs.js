@@ -147,6 +147,57 @@ Dans le simulateur : clique sur un PC, remplis **Configuration IP** puis **Enreg
       solution: [['PC2', ['Configuration IP → 192.168.1.11 / 255.255.255.0 → Enregistrer']], ['PC1', ['Configuration IP → 192.168.1.10 / 255.255.255.0 → Enregistrer', 'ipconfig', 'ping 192.168.1.11', 'ping 192.168.1.50']]]
     },
     {
+      id: 'cablage', level: 1, time: '15 min', title: 'Câbler un réseau : droit, croisé et console', cabling: true,
+      desc: 'Choisir le bon câble, brancher les bons ports, lire les voyants et ouvrir une session console.',
+      devices: [{ id: 'R1', type: 'router', x: 320, y: 55 }, { id: 'SW1', type: 'switch', x: 190, y: 150 }, { id: 'SW2', type: 'switch', x: 450, y: 150 },
+        { id: 'PC1', type: 'pc', x: 190, y: 255, pc: { ip: '192.168.1.10', mask: '255.255.255.0', gw: '192.168.1.1' } }, { id: 'PC2', type: 'laptop', x: 450, y: 255, label: 'Portable', pc: { ip: '192.168.1.11', mask: '255.255.255.0', gw: '192.168.1.1' } }],
+      links: [],
+      setup: { R1: ['hostname R1', 'interface g0/0', 'ip address 192.168.1.1 255.255.255.0', 'no shutdown'], SW1: ['hostname SW1'], SW2: ['hostname SW2'] },
+      start: 'PC1',
+      cours: `## Le bon câble au bon endroit
+
+Dans un réseau Ethernet, on utilise des câbles à paires torsadées (RJ45). Il en existe deux sortes :
+
+| Câble | Les fils… | On l'utilise entre… |
+|---|---|---|
+| ==droit== | arrivent au même endroit des deux côtés | deux équipements **différents** : PC ↔ switch, routeur ↔ switch, serveur ↔ switch |
+| ==croisé== | émission et réception sont inversées | deux équipements **semblables** : switch ↔ switch, PC ↔ PC, routeur ↔ routeur, PC ↔ routeur |
+
+> [!retenir] Le moyen de s'en souvenir
+> PC, routeur et serveur sont de la **même famille** ; le switch est de l'autre famille. **Familles différentes → droit. Même famille → croisé.**
+
+Les équipements récents savent inverser les fils tout seuls (**Auto-MDIX**), mais à l'examen on te demande le bon câble. Dans l'atelier, le câble **Auto** choisit à ta place.
+
+## Les voyants
+
+- **Vert** : la liaison fonctionne.
+- **Orange** : le port démarre (sur un switch, il passe au vert après quelques secondes).
+- **Rouge** : rien ne passe → mauvais câble, ou port éteint (**shutdown**). Sur un routeur, les ports sont éteints au départ : il faut **no shutdown**.
+
+## Le câble console
+
+Le câble console (bleu clair) relie le port **RS232** d'un PC au port **Console** d'un routeur ou d'un switch. Il sert à configurer un équipement **neuf**, qui n'a pas encore d'adresse IP. Sur le PC, on ouvre ensuite **Bureau → Terminal** : c'est la même ligne de commande que dans l'onglet CLI.
+
+## Dans l'atelier
+
+1. Choisis un câble en bas (Droit, Croisé ou Console).
+2. Touche le premier équipement et choisis le port.
+3. Touche le second équipement et choisis le port.
+4. Regarde les voyants, puis teste avec **Message simple** (l'enveloppe) ou **ping**.`,
+      goals: [
+        { t: 'Relie PC1 au switch SW1 avec le bon câble', hint: 'PC et switch sont de familles différentes → câble droit. Port FastEthernet0 du PC → un port FastEthernet du switch.', c: (h) => h.linkUp('PC1', 'SW1') },
+        { t: 'Relie le portable au switch SW2', hint: 'Câble droit entre le port FastEthernet0 du portable et un port FastEthernet de SW2.', c: (h) => h.linkUp('PC2', 'SW2') },
+        { t: 'Relie les deux switchs entre eux', hint: 'Deux switchs = même famille → câble croisé (par exemple GigabitEthernet0/1 ↔ GigabitEthernet0/1).', c: (h) => h.linkUp('SW1', 'SW2') },
+        { t: 'Relie le routeur R1 (port G0/0) à SW1', hint: 'Routeur et switch : câble droit, du port GigabitEthernet0/0 de R1 vers un port de SW1. Le port G0/0 est déjà configuré et allumé.', c: (h) => h.linkUp('R1', 'SW1', 'GigabitEthernet0/0') },
+        { t: 'Branche un câble console entre PC1 et le routeur', hint: 'Outil « Console » : port RS232 de PC1 → port Console de R1.', c: (h) => h.console('PC1', 'R1') },
+        { t: 'Ouvre le Terminal de PC1 pour configurer le routeur', hint: 'Touche PC1 → onglet Bureau → Terminal.', c: (h) => h.console('PC1', 'R1') && h.used('PC1', 'terminal') },
+        { t: 'Le portable ping PC1', hint: 'Portable → Bureau → Invite de commandes → ping 192.168.1.10 (ou l\'enveloppe Message simple).', c: (h) => h.pinged('PC2', '192.168.1.10') },
+        { t: 'Le portable ping le routeur (192.168.1.1)', hint: 'ping 192.168.1.1 depuis le portable : le paquet traverse SW2, le câble croisé, puis SW1.', c: (h) => h.pinged('PC2', '192.168.1.1') }
+      ],
+      solution: [['Câblage', ['Câble droit : PC1 FastEthernet0 ↔ SW1 FastEthernet0/1', 'Câble droit : PC2 FastEthernet0 ↔ SW2 FastEthernet0/1', 'Câble croisé : SW1 GigabitEthernet0/1 ↔ SW2 GigabitEthernet0/1', 'Câble droit : R1 GigabitEthernet0/0 ↔ SW1 GigabitEthernet0/2', 'Câble console : PC1 RS232 ↔ R1 Console']],
+        ['PC1', ['Bureau → Terminal']], ['PC2', ['ping 192.168.1.10', 'ping 192.168.1.1']]]
+    },
+    {
       id: 'svi', level: 1, time: '15 min', title: 'Administrer un switch à distance',
       desc: 'Donner une adresse IP au switch (interface VLAN 1), sa passerelle, et vérifier avec show ip interface brief.',
       devices: [{ id: 'SW1', type: 'switch', x: 320, y: 90 }, { id: 'PC1', type: 'pc', x: 320, y: 225, pc: { ip: '192.168.1.10', mask: '255.255.255.0', gw: '192.168.1.1' } }],
@@ -639,6 +690,12 @@ Un client appelle : « **PC1 n'arrive pas à joindre PC2** ». Le réseau a ét�
       excluded: (id, lo, hi) => { for (let k = ip(lo); k <= ip(hi); k++) if (!dev(id).cfg.excluded.some((x) => k >= x[0] && k <= x[1])) return false; return true; },
       pool: (id, n, m, gw) => Object.keys(dev(id).cfg.pools).some((k) => { const p = dev(id).cfg.pools[k]; return p.network === ip(n) && p.mask === ip(m) && (!gw || p.router === ip(gw)); }),
       dhcpOk: (id, n, m) => { const p = dev(id).pc; return p.dhcp && p.ip != null && NS.net(p.ip, ip(m)) === ip(n); },
+      /* câble Ethernet qui fonctionne entre a et b (sur le port ia de a si précisé) */
+      linkUp: (a, b, ia) => sim.links.some((l) => {
+        const [x, y] = l.a[0] === a ? [l.a, l.b] : [l.b, l.a];
+        return x[0] === a && y[0] === b && (!ia || x[1] === ia) && sim.physUp(x[0], x[1]);
+      }),
+      console: (pc, d) => sim.links.some((l) => l.cable === 'console' && sim.cableOk(l) && ((l.a[0] === pc && l.b[0] === d) || (l.a[0] === d && l.b[0] === pc))),
       ace: (id, num, action, src, wild) => (dev(id).cfg.acls[num] || []).some((e) => e.action === action && e.src === ip(src) && e.wild === ip(wild))
     };
   }
